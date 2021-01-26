@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrenchPlugin", "WrenchPlugin\WrenchPlugin.csproj", "{91A2A655-EA67-4DD5-962B-E7FDF4E02BF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrenchPlugin.UI", "WrenchPlugin.UI\WrenchPlugin.UI.csproj", "{91A2A655-EA67-4DD5-962B-E7FDF4E02BF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrenchPlugin.Model", "WrenchPlugin.Model\WrenchPlugin.Model.csproj", "{9B9F4EA5-891A-4734-9116-BDEAD015A5AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrenchPlugin.UnitTests", "WrenchPlugin.UnitTests\WrenchPlugin.UnitTests.csproj", "{75C3E402-9687-4B6B-BFA8-C6B1F0784349}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{91A2A655-EA67-4DD5-962B-E7FDF4E02BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91A2A655-EA67-4DD5-962B-E7FDF4E02BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91A2A655-EA67-4DD5-962B-E7FDF4E02BF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B9F4EA5-891A-4734-9116-BDEAD015A5AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B9F4EA5-891A-4734-9116-BDEAD015A5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B9F4EA5-891A-4734-9116-BDEAD015A5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B9F4EA5-891A-4734-9116-BDEAD015A5AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75C3E402-9687-4B6B-BFA8-C6B1F0784349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75C3E402-9687-4B6B-BFA8-C6B1F0784349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75C3E402-9687-4B6B-BFA8-C6B1F0784349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75C3E402-9687-4B6B-BFA8-C6B1F0784349}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
