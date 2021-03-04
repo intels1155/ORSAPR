@@ -31,8 +31,8 @@ namespace WrenchPlugin.Model
 		/// Построение ключа
 		/// </summary>
 		/// <param name="iPart"></param>
-		/// <param name="kompas"></param>
-		/// <param name="wrenchParameters"></param>
+		/// <param name="kompas">API КОМПАС-3D</param>
+		/// <param name="wrenchParameters">Параметры ключа</param>
 		public void CreateMain(ksPart iPart, KompasObject kompas, WrenchParameters wrenchParameters)
 		{
 			double leftOpeningSize = wrenchParameters.LeftOpeningSize;
@@ -83,9 +83,9 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Создать эскиз шестиугольника на смещенной плоскости от базовой плоскости YOZ
 		/// </summary>
-		/// <param name="Sketch"></param>
-		/// <param name="DefinitionSketch"></param>
-		/// <param name="newPlane"
+		/// <param name="Sketch">Интерфейс плоскости эскиза</param>
+		/// <param name="DefinitionSketch">Эскиз</param>
+		/// <param name="newPlane">Новая смещенная плоскость</param>
 		/// <param name="offset"></param>
 		public void CreateHexSketch(ksPart iPart, KompasObject kompas, out ksEntity sketch, 
 			out ksSketchDefinition sketchDef, ref ksEntity currentPlane, double offset, double size)
@@ -96,32 +96,21 @@ namespace WrenchPlugin.Model
 			// Интерфейс настроек смещенной плоскости
 			ksPlaneOffsetDefinition newPlaneDefinition = (ksPlaneOffsetDefinition)newPlane.GetDefinition();
 
-			newPlaneDefinition.SetPlane(currentPlane); // начальная позиция плоскости
-			newPlaneDefinition.direction = true; // направление смещения,
+			newPlaneDefinition.SetPlane(currentPlane); // начальная позиция плоскости: от предыдущей
+			newPlaneDefinition.direction = true; // направление смещения: прямое
 			newPlaneDefinition.offset = offset; // расстояние смещения
 			newPlane.Create(); // создать плоскость
 
 			sketch = (ksEntity)iPart.NewEntity((short)Obj3dType.o3d_sketch); // Интерфейс эскиза 
 			sketchDef = sketch.GetDefinition();
-			sketchDef.SetPlane(newPlane);  // установка базовой плоскости для эскиза
+			sketchDef.SetPlane(newPlane);  // установка новой базовой плоскости для эскиза
 			sketchDef.angle = 0; // угол поворота эскиза
 			sketch.Create(); // создать эскиз
 
 			currentPlane = newPlane; // установить последнюю созданную плоскость текущей
 			ksDocument2D sketchEdit = (ksDocument2D)sketchDef.BeginEdit();
 
-			DrawHexagon(kompas, ref sketchDef, ref sketchEdit, size);
-			// эскиз шестиугольника
-			/*ksRegularPolygonParam hexagonParam = (ksRegularPolygonParam)kompas.GetParamStruct((short)StructType2DEnum.ko_RegularPolygonParam);
-			hexagonParam.ang = 0; // угол поворота
-			hexagonParam.count = 6; //число углов
-			hexagonParam.describe = true;
-			hexagonParam.radius = size;
-			hexagonParam.style = 1; // Стиль линии - основной
-			hexagonParam.xc = 0;
-			hexagonParam.yc = 0;
-			sketchEdit.ksRegularPolygon(hexagonParam);
-			sketchDef.EndEdit();*/
+			DrawHexagon(kompas, ref sketchDef, ref sketchEdit, size); // экиз шестиугольника на плоскости
 		}
 
 		/// <summary>
@@ -137,7 +126,7 @@ namespace WrenchPlugin.Model
 			ksRegularPolygonParam hexagonParam = (ksRegularPolygonParam)kompas.GetParamStruct((short)StructType2DEnum.ko_RegularPolygonParam);
 			hexagonParam.ang = 0;
 			hexagonParam.count = 6;
-			hexagonParam.describe = true;
+			hexagonParam.describe = true; // Вписанный многоугольник
 			hexagonParam.radius = size;
 			hexagonParam.style = 1; // Стиль линии - основной
 			hexagonParam.xc = 0;
@@ -152,11 +141,14 @@ namespace WrenchPlugin.Model
 		/// <param name="iPart"></param>
 		/// <param name="sketch1"></param>
 		/// <param name="sketch2"></param>
+		/// <param name="thickness">Толщина </param>
 		public void CreateLoftElement(ksPart iPart, ksEntity sketch1, ksEntity sketch2, double thickness)
 		{
 			var loftElement = (ksEntity)iPart.NewEntity((short)Obj3dType.o3d_baseLoft);
 			var baseLoftDefinition = (ksBaseLoftDefinition)loftElement.GetDefinition();
+			// Параметры операции по сечениям: замкнутость траектории, резерв для дальн. использования, авто. форм. траектории
 			baseLoftDefinition.SetLoftParam(false, true, true);
+			// Параметры тонкой стенки: признак операции, направление, толщина в прямом направл., толщина в обр. направл.
 			baseLoftDefinition.SetThinParam(true, (short)Direction_Type.dtNormal, thickness, 0);
 			var sketches = (ksEntityCollection)baseLoftDefinition.Sketchs();
 			sketches.Clear();

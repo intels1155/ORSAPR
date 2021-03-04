@@ -11,30 +11,15 @@ namespace WrenchPlugin.UI
 	public partial class MainForm : Form
 	{
 		private KompasConnector _kompasConnector;
-		//private WrenchParameters _wrenchParameters;
+		private WrenchParameters _wrenchParameters;
 		
+		/// <summary>
+		/// Окно программы
+		/// </summary>
 		public MainForm()
 		{
 			InitializeComponent();
-			DefaultWrenchParameters(); // Параметры по умолчанию
-
-			// Минимальные параметры по умолчанию
-			//defaultParamComboBox.SelectedIndex = 0;
-		}
-
-		/// <summary>
-		/// Параметры по умолчанию
-		/// </summary>
-		private void DefaultWrenchParameters()
-		{
-			leftOpenSizeNum.Value = 16;
-			leftOpenDepthNum.Value = 24;
-			rightOpenSizeNum.Value = 18;
-			rightOpenDepthNum.Value = 26;
-			wallThicknessNum.Value = 4;
-			tubeWidthNum.Value = 14;
-			holesDiameterNum.Value = 10;
-			wrenchLengthNum.Value = 180;
+			defaultParamComboBox.SelectedIndex = 0;
 		}
 
 
@@ -45,7 +30,7 @@ namespace WrenchPlugin.UI
 		{
 			try
 			{
-				WrenchParameters wrenchParameters = new WrenchParameters(
+				_wrenchParameters = new WrenchParameters(
 					(double)leftOpenSizeNum.Value,
 					(double)leftOpenDepthNum.Value,
 					(double)rightOpenSizeNum.Value,
@@ -54,9 +39,9 @@ namespace WrenchPlugin.UI
 					(double)tubeWidthNum.Value,
 					(double)holesDiameterNum.Value,
 					(double)wrenchLengthNum.Value);
-				_kompasConnector = new KompasConnector(wrenchParameters);
+				_kompasConnector = new KompasConnector(_wrenchParameters);
 				WrenchBuilder wrenchbuilder = new WrenchBuilder();
-				wrenchbuilder.Build(_kompasConnector.iPart, _kompasConnector.kompas, wrenchParameters);
+				wrenchbuilder.Build(_kompasConnector.iPart, _kompasConnector.kompas, _wrenchParameters);
 			}
 			catch (ArgumentException ex)
 			{
@@ -68,13 +53,24 @@ namespace WrenchPlugin.UI
 		}
 
 		/// <summary>
-		/// Выбор минимальных/максимальных параметров
+		/// Выбор предустановленных параметров в ComboBox
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void defaultParamComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (defaultParamComboBox.SelectedIndex == 0) // выбор минимальных параметров
+			if (defaultParamComboBox.SelectedIndex == 0) // параметры для демонстрации (по умолчанию)
+			{
+				leftOpenSizeNum.Value = 16;
+				leftOpenDepthNum.Value = 24;
+				rightOpenSizeNum.Value = 18;
+				rightOpenDepthNum.Value = 26;
+				wallThicknessNum.Value = 4;
+				tubeWidthNum.Value = 14;
+				holesDiameterNum.Value = 10;
+				wrenchLengthNum.Value = 180;
+			}
+			if (defaultParamComboBox.SelectedIndex == 1) // выбор минимальных параметров
 			{
 				foreach (Control c in ParameterBox.Controls)
 				{
@@ -85,7 +81,7 @@ namespace WrenchPlugin.UI
 					}
 				}
 			}
-			if (defaultParamComboBox.SelectedIndex == 1) // выбор максимальных параметров
+			if (defaultParamComboBox.SelectedIndex == 2) // выбор максимальных параметров
 			{
 				foreach (Control c in ParameterBox.Controls)
 				{

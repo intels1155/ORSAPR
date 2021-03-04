@@ -506,6 +506,7 @@
 			this.defaultParamComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.defaultParamComboBox.FormattingEnabled = true;
 			this.defaultParamComboBox.Items.AddRange(new object[] {
+            "По умолчанию",
             "Минимальные",
             "Максимальные"});
 			this.defaultParamComboBox.Location = new System.Drawing.Point(214, 12);

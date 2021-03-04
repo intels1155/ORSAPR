@@ -10,17 +10,17 @@ namespace WrenchPlugin.Model
 	public class KompasConnector
 	{
 		/// <summary>
-		/// Объект Компас.
+		/// Главный инферфейс API Компас.
 		/// </summary>
 		private KompasObject _kompas = null;
 
 		/// <summary>
-		/// Документ компас3D.
+		/// 3D-документ компас3D.
 		/// </summary>
 		private ksDocument3D _doc3D = null;
 
 		/// <summary>
-		/// Интерфейс компонента.
+		/// Интерфейс детали/компонента сборки.
 		/// </summary>
 		private ksPart _iPart = null;
 
