@@ -14,7 +14,7 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Интерфейс модели
 		/// </summary>
-		public ksPart _iPart;
+		private ksPart _iPart;
 
 		/// <summary>
 		/// Построение ключа
