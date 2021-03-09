@@ -51,7 +51,7 @@ namespace WrenchPlugin.Model
 		/// </summary>
 		private double _wrenchLength;
 
-		// Список ошибок...............!!!!!!!!!!!
+		// Список ошибок в параметрах
 		private List<string> _errorMessage = new List<string>();
 
 		/// <summary>

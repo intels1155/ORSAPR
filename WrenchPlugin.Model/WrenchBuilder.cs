@@ -159,7 +159,7 @@ namespace WrenchPlugin.Model
 
 
 		/// <summary>
-		/// Создать эскиз шестиугольника на смещенной плоскости от базовой плоскости YOZ
+		/// Выдавливание отверстий в ключе
 		/// </summary>
 		/// <param name="Sketch"></param>
 		/// <param name="DefinitionSketch"></param>

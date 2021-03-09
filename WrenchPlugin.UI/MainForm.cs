@@ -39,9 +39,9 @@ namespace WrenchPlugin.UI
 					(double)tubeWidthNum.Value,
 					(double)holesDiameterNum.Value,
 					(double)wrenchLengthNum.Value);
-				KompasConnector _kompasConnector = new KompasConnector();
+				KompasConnector kompasConnector = new KompasConnector();
 				WrenchBuilder wrenchbuilder = new WrenchBuilder();
-				wrenchbuilder.Build(_kompasConnector.iPart, _kompasConnector.Kompas, _wrenchParameters);
+				wrenchbuilder.Build(kompasConnector.iPart, kompasConnector.Kompas, _wrenchParameters);
 			}
 			catch (ArgumentException ex)
 			{
