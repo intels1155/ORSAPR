@@ -14,14 +14,14 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Интерфейс модели
 		/// </summary>
-		private ksPart _iPart;
+		//private ksPart _iPart;
 
 		/// <summary>
 		/// Построение ключа
 		/// </summary>
 		public void Build(ksPart iPart, KompasObject kompas, WrenchParameters wrenchParameters)
 		{
-			this._iPart = iPart;
+			//this._iPart = iPart;
 			//var basePlane = (ksEntity)iPart.GetDefaultEntity((short)Obj3dType.o3d_planeYOZ);
 			CreateMain(iPart, kompas, wrenchParameters);
 			CreateHoles(iPart, kompas, wrenchParameters);

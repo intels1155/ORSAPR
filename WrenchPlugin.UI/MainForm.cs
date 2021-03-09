@@ -10,8 +10,8 @@ namespace WrenchPlugin.UI
 {
 	public partial class MainForm : Form
 	{
-		private KompasConnector _kompasConnector;
-		private WrenchParameters _wrenchParameters;
+		//private KompasConnector _kompasConnector;
+		//private WrenchParameters _wrenchParameters;
 		
 		/// <summary>
 		/// Окно программы
@@ -30,7 +30,7 @@ namespace WrenchPlugin.UI
 		{
 			try
 			{
-				_wrenchParameters = new WrenchParameters(
+				WrenchParameters _wrenchParameters = new WrenchParameters(
 					(double)leftOpenSizeNum.Value,
 					(double)leftOpenDepthNum.Value,
 					(double)rightOpenSizeNum.Value,
@@ -39,9 +39,9 @@ namespace WrenchPlugin.UI
 					(double)tubeWidthNum.Value,
 					(double)holesDiameterNum.Value,
 					(double)wrenchLengthNum.Value);
-				_kompasConnector = new KompasConnector(_wrenchParameters);
+				KompasConnector _kompasConnector = new KompasConnector();
 				WrenchBuilder wrenchbuilder = new WrenchBuilder();
-				wrenchbuilder.Build(_kompasConnector.iPart, _kompasConnector.kompas, _wrenchParameters);
+				wrenchbuilder.Build(_kompasConnector.iPart, _kompasConnector.Kompas, _wrenchParameters);
 			}
 			catch (ArgumentException ex)
 			{

@@ -10,12 +10,12 @@ namespace WrenchPlugin.Model
 	public class KompasConnector
 	{
 		/// <summary>
-		/// Главный инферфейс API Компас.
+		/// Главный интерфейс API Компас.
 		/// </summary>
 		private KompasObject _kompas = null;
 
 		/// <summary>
-		/// 3D-документ компас3D.
+		/// 3D-документ Компас-3D.
 		/// </summary>
 		private ksDocument3D _doc3D = null;
 
@@ -27,7 +27,7 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Соединение с САПР и передача параметров.
 		/// </summary>
-		public KompasConnector(WrenchParameters wrenchParameters)
+		public KompasConnector()
 		{
 			TakeKompas();
 		}
@@ -35,7 +35,7 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Свойства _kompas.
 		/// </summary>
-		public KompasObject kompas
+		public KompasObject Kompas
 		{
 			get
 			{
