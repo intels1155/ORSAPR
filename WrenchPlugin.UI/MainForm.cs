@@ -10,10 +10,7 @@ namespace WrenchPlugin.UI
 {
 	public partial class MainForm : Form
 	{
-		//private KompasConnector _kompasConnector;
-		//private WrenchParameters _wrenchParameters;
-		
-		/// <summary>
+        /// <summary>
 		/// Окно программы
 		/// </summary>
 		public MainForm()
@@ -61,7 +58,8 @@ namespace WrenchPlugin.UI
 		{
 			if (defaultParamComboBox.SelectedIndex == 0) // параметры для демонстрации (по умолчанию)
 			{
-				leftOpenSizeNum.Value = 16;
+				var tmpParams = new WrenchParameters();
+				leftOpenSizeNum.Value = (decimal) tmpParams.LeftOpeningSize;
 				leftOpenDepthNum.Value = 24;
 				rightOpenSizeNum.Value = 18;
 				rightOpenDepthNum.Value = 26;

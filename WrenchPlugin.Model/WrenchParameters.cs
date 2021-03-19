@@ -87,6 +87,9 @@ namespace WrenchPlugin.Model
 			ValuesValidationErrors();
 		}
 
+		public WrenchParameters():this(1,2,3,4,5,6,7,8)
+        {}
+
 		/// <summary>
 		/// Собрать сообщения об ошибках
 		/// </summary>
@@ -110,8 +113,10 @@ namespace WrenchPlugin.Model
 				{
 					_errorMessage.Add("- Размер зева 1 выходит за предел допустимых значений (4 - 75 мм)");
 				}
-				else
-				_leftOpeningSize = value;
+                else
+                {
+                    _leftOpeningSize = value;
+                }
 			}
 		}
 
@@ -123,10 +128,12 @@ namespace WrenchPlugin.Model
 			get	=> _leftOpeningDepth;
 			set
 			{
+                //TODo: Убрать дублирование
 				if (value < 2 || value > 50)
 				{
 					_errorMessage.Add("- Глубина зева 1 выходит за предел допустимых значений (2 - 50 мм)");
 				}
+				//TODO: RSDN
 				else
 				_leftOpeningDepth = value;
 			}

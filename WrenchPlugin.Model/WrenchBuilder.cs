@@ -34,6 +34,7 @@ namespace WrenchPlugin.Model
 			// Массив эскизов
 			ksEntity[] sketchList = new ksEntity[6];
 
+			//TODO: В именованые константы
 			// Массив расстояний смещения плоскостей эскизов
 			double[] planeOffsetList = {
 				0,
@@ -77,8 +78,10 @@ namespace WrenchPlugin.Model
 
 			// Координаты Y точек центра окружностей
 			double[] circleCenterPointY = {
-				0 - (wrenchParameters.LeftOpeningDepth * 2 + circleRadius), // центр эскиза 1 отв.
-				0 - (wrenchParameters.WrenchLength - (wrenchParameters.RightOpeningDepth * 1.75) - circleRadius) // центр эскиза 2 отв.
+                // центр эскиза 1 отв.
+				 - (wrenchParameters.LeftOpeningDepth * 2 + circleRadius), 
+                // центр эскиза 2 отв.
+				 - (wrenchParameters.WrenchLength - (wrenchParameters.RightOpeningDepth * 1.75) - circleRadius) 
 			};
 
 			// Плоскости XOZ, XOY
