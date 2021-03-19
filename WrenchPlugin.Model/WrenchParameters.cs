@@ -14,7 +14,7 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Ширина зева ключа 1
 		/// </summary>
-		private double _leftOpeningSize;
+		private Parameter _leftOpeningSize;
 
 		/// <summary>
 		/// Глубина зева ключа 1
@@ -76,7 +76,7 @@ namespace WrenchPlugin.Model
 			double wrenchLength)
 		{
 
-			LeftOpeningSize = leftOpeningSize;
+			LeftOpeningSize = new Parameter(5,40,leftOpeningSize);
 			LeftOpeningDepth = leftOpeningDepth;
 			RightOpeningSize = rightOpeningSize;
 			RightOpeningDepth = rightOpeningDepth;
@@ -104,18 +104,20 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Ширина зева ключа 1
 		/// </summary>
-		public double LeftOpeningSize
+		public Parameter LeftOpeningSize
 		{
 			get => _leftOpeningSize;
 			set
 			{
-				if (value < 4 || value < TubeWidth || value > 75)
+				if (value < _leftOpeningSize.Minimum 
+                    || value < TubeWidth 
+                    || value > _leftOpeningSize.Maximum)
 				{
 					_errorMessage.Add("- Размер зева 1 выходит за предел допустимых значений (4 - 75 мм)");
 				}
                 else
                 {
-                    _leftOpeningSize = value;
+                    _leftOpeningSize.Value = value;
                 }
 			}
 		}
