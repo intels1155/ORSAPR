@@ -12,37 +12,37 @@ namespace WrenchPlugin.Model
 	public class WrenchParameters
 	{
 		/// <summary>
-		/// Ширина зева ключа 1.
+		/// Ширина зева ключа 1
 		/// </summary>
 		private double _leftOpeningSize;
 
 		/// <summary>
-		/// Глубина зева ключа 1.
+		/// Глубина зева ключа 1
 		/// </summary>
 		private double _leftOpeningDepth;
 
 		/// <summary>
-		/// Ширина зева ключа 2.
+		/// Ширина зева ключа 2
 		/// </summary>
 		private double _rightOpeningSize;
 
 		/// <summary>
-		/// Глубина зева ключа 2.
+		/// Глубина зева ключа 2
 		/// </summary>
 		private double _rightOpeningDepth;
 
 		/// <summary>
-		/// Толщина стенок ключа.
+		/// Толщина стенок ключа
 		/// </summary>
 		private double _wallThickness;
 
 		/// <summary>
-		/// Ширина трубки ключа.
+		/// Ширина трубки ключа
 		/// </summary>
 		private double _tubeWidth;
 
 		/// <summary>
-		/// Диаметр отверстий ключа.
+		/// Диаметр отверстий ключа
 		/// </summary>
 		private double _holesDiameter;
 
@@ -87,7 +87,9 @@ namespace WrenchPlugin.Model
 			ValuesValidationErrors();
 		}
 
-		// Собрать сообщения об ошибках
+		/// <summary>
+		/// Собрать сообщения об ошибках
+		/// </summary>
 		private void ValuesValidationErrors()
 		{
 			if (_errorMessage.Count > 0)
@@ -97,7 +99,7 @@ namespace WrenchPlugin.Model
 		}
 
 		/// <summary>
-		/// Ширина зева ключа 1.
+		/// Ширина зева ключа 1
 		/// </summary>
 		public double LeftOpeningSize
 		{
@@ -114,7 +116,7 @@ namespace WrenchPlugin.Model
 		}
 
 		/// <summary>
-		/// Глубина зева ключа 1.
+		/// Глубина зева ключа 1
 		/// </summary>
 		public double LeftOpeningDepth
 		{
@@ -131,7 +133,7 @@ namespace WrenchPlugin.Model
 		}
 
 		/// <summary>
-		/// Ширина зева ключа 2.
+		/// Ширина зева ключа 2
 		/// </summary>
 		/// 		
 		public double RightOpeningSize
@@ -150,7 +152,7 @@ namespace WrenchPlugin.Model
 		}
 
 		/// <summary>
-		/// Глубина зева ключа 2.
+		/// Глубина зева ключа 2
 		/// </summary>
 		/// 		
 		public double RightOpeningDepth
@@ -168,7 +170,7 @@ namespace WrenchPlugin.Model
 		}
 
 		/// <summary>
-		/// Толщина стенок ключа.
+		/// Толщина стенок ключа
 		/// </summary>
 		public double WallThickness
 		{
@@ -185,14 +187,13 @@ namespace WrenchPlugin.Model
 		}
 
 		/// <summary>
-		/// Ширина трубки ключа.
+		/// Ширина трубки ключа
 		/// </summary>
 		public double TubeWidth
 		{
 			get => _tubeWidth;
 			set
 			{
-				// диаметр трубки ключа
 				if (value < 4 || value > 75)
 				{
 					_errorMessage.Add("- Диаметр трубки ключа выходит за предел допустимых значений (4 - 75 мм)");
@@ -207,7 +208,7 @@ namespace WrenchPlugin.Model
 		}
 
 		/// <summary>
-		/// Диаметр отверстий ключа.
+		/// Диаметр отверстий ключа
 		/// </summary>
 		public double HolesDiameter
 		{
@@ -229,7 +230,7 @@ namespace WrenchPlugin.Model
 		}
 
 		/// <summary>
-		/// Длина ключа.
+		/// Длина ключа
 		/// </summary>
 		public double WrenchLength
 		{

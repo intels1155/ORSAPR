@@ -41,7 +41,7 @@ namespace WrenchPlugin.UI
 					(double)wrenchLengthNum.Value);
 				KompasConnector kompasConnector = new KompasConnector();
 				WrenchBuilder wrenchbuilder = new WrenchBuilder();
-				wrenchbuilder.Build(kompasConnector.iPart, kompasConnector.Kompas, _wrenchParameters);
+				wrenchbuilder.Build(kompasConnector, _wrenchParameters);
 			}
 			catch (ArgumentException ex)
 			{
@@ -67,7 +67,7 @@ namespace WrenchPlugin.UI
 				rightOpenDepthNum.Value = 26;
 				wallThicknessNum.Value = 4;
 				tubeWidthNum.Value = 14;
-				holesDiameterNum.Value = 10;
+				holesDiameterNum.Value = 6;
 				wrenchLengthNum.Value = 180;
 			}
 			if (defaultParamComboBox.SelectedIndex == 1) // выбор минимальных параметров

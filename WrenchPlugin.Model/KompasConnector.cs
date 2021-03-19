@@ -5,27 +5,27 @@ using Kompas6Constants3D;
 namespace WrenchPlugin.Model
 {
 	/// <summary>
-	/// Класс для подключения к САПР КОМПАС-3D.
+	/// Класс для подключения к САПР КОМПАС-3D
 	/// </summary>
 	public class KompasConnector
 	{
 		/// <summary>
-		/// Главный интерфейс API Компас.
+		/// Главный интерфейс API КОМПАС-3D
 		/// </summary>
 		private KompasObject _kompas = null;
 
 		/// <summary>
-		/// 3D-документ Компас-3D.
+		/// 3D-документ
 		/// </summary>
 		private ksDocument3D _doc3D = null;
 
 		/// <summary>
-		/// Интерфейс детали/компонента сборки.
+		/// Интерфейс детали/компонента сборки
 		/// </summary>
-		private ksPart _iPart = null;
+		private ksPart _part = null;
 
 		/// <summary>
-		/// Соединение с САПР и передача параметров.
+		/// Соединение с САПР и передача параметров
 		/// </summary>
 		public KompasConnector()
 		{
@@ -33,7 +33,7 @@ namespace WrenchPlugin.Model
 		}
 
 		/// <summary>
-		/// Свойства _kompas.
+		/// Свойство Kompas (интерфейс API)
 		/// </summary>
 		public KompasObject Kompas
 		{
@@ -47,22 +47,22 @@ namespace WrenchPlugin.Model
 			}
 		}
 		/// <summary>
-		/// Свойства _iPart.
+		/// Свойство Part (компонент/сборка)
 		/// </summary>
-		public ksPart iPart
+		public ksPart Part
 		{
 			get
 			{
-				return _iPart;
+				return _part;
 			}
 			set
 			{
-				_iPart = value;
+				_part = value;
 			}
 		}
 
 		/// <summary>
-		/// Открыть деталь в Компасе.
+		/// Открыть деталь в Компасе
 		/// </summary>
 		public void TakeKompas()
 		{
@@ -76,7 +76,7 @@ namespace WrenchPlugin.Model
 
 			_doc3D = (ksDocument3D)_kompas.Document3D();
 			_doc3D.Create(false, true);
-			_iPart = (ksPart)_doc3D.GetPart((short)Part_Type.pTop_Part);
+			_part = (ksPart)_doc3D.GetPart((short)Part_Type.pTop_Part);
 		}
 	}
 }
