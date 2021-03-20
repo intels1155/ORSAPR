@@ -59,14 +59,14 @@ namespace WrenchPlugin.UI
 			if (defaultParamComboBox.SelectedIndex == 0) // параметры для демонстрации (по умолчанию)
 			{
 				var tmpParams = new WrenchParameters();
-				leftOpenSizeNum.Value = (decimal) tmpParams.LeftOpeningSize;
-				leftOpenDepthNum.Value = 24;
-				rightOpenSizeNum.Value = 18;
-				rightOpenDepthNum.Value = 26;
-				wallThicknessNum.Value = 4;
-				tubeWidthNum.Value = 14;
-				holesDiameterNum.Value = 6;
-				wrenchLengthNum.Value = 180;
+				leftOpenSizeNum.Value = (decimal) tmpParams.LeftOpeningSize.Value;
+				leftOpenDepthNum.Value = (decimal)tmpParams.LeftOpeningDepth.Value;
+				rightOpenSizeNum.Value = (decimal)tmpParams.RightOpeningSize.Value;
+				rightOpenDepthNum.Value = (decimal)tmpParams.RightOpeningDepth.Value;
+				wallThicknessNum.Value = (decimal)tmpParams.WallThickness.Value;
+				tubeWidthNum.Value = (decimal)tmpParams.TubeWidth.Value;
+				holesDiameterNum.Value = (decimal)tmpParams.HolesDiameter.Value;
+				wrenchLengthNum.Value = (decimal)tmpParams.WrenchLength.Value;
 			}
 			if (defaultParamComboBox.SelectedIndex == 1) // выбор минимальных параметров
 			{

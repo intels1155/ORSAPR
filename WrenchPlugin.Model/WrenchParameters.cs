@@ -19,37 +19,37 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Глубина зева ключа 1
 		/// </summary>
-		private double _leftOpeningDepth;
+		private Parameter _leftOpeningDepth;
 
 		/// <summary>
 		/// Ширина зева ключа 2
 		/// </summary>
-		private double _rightOpeningSize;
+		private Parameter _rightOpeningSize;
 
 		/// <summary>
 		/// Глубина зева ключа 2
 		/// </summary>
-		private double _rightOpeningDepth;
+		private Parameter _rightOpeningDepth;
 
 		/// <summary>
 		/// Толщина стенок ключа
 		/// </summary>
-		private double _wallThickness;
+		private Parameter _wallThickness;
 
 		/// <summary>
 		/// Ширина трубки ключа
 		/// </summary>
-		private double _tubeWidth;
+		private Parameter _tubeWidth;
 
 		/// <summary>
 		/// Диаметр отверстий ключа
 		/// </summary>
-		private double _holesDiameter;
+		private Parameter _holesDiameter;
 
 		/// <summary>
 		/// Длина ключа.
 		/// </summary>
-		private double _wrenchLength;
+		private Parameter _wrenchLength;
 
 		// Список ошибок в параметрах
 		private List<string> _errorMessage = new List<string>();
@@ -76,18 +76,18 @@ namespace WrenchPlugin.Model
 			double wrenchLength)
 		{
 
-			LeftOpeningSize = new Parameter(5,40,leftOpeningSize);
-			LeftOpeningDepth = leftOpeningDepth;
-			RightOpeningSize = rightOpeningSize;
-			RightOpeningDepth = rightOpeningDepth;
-			WallThickness = wallThickness;
-			TubeWidth = tubeWidth;
-			HolesDiameter = holesDiameter;
-			WrenchLength = wrenchLength;
+			LeftOpeningSize = new Parameter(5, 40, leftOpeningSize);
+			LeftOpeningDepth = new Parameter(2, 50, leftOpeningDepth);
+			RightOpeningSize = new Parameter(5, 80, rightOpeningSize);
+			RightOpeningDepth = new Parameter(2.5, 50, rightOpeningDepth);
+			WallThickness = new Parameter(2, 14, wallThickness);
+			TubeWidth = new Parameter(4, 75, tubeWidth);
+			HolesDiameter = new Parameter(2, 40, holesDiameter);
+			WrenchLength = new Parameter(80, 400, wrenchLength);
 			ValuesValidationErrors();
 		}
 
-		public WrenchParameters():this(1,2,3,4,5,6,7,8)
+		public WrenchParameters():this(16,24,18,26,4,14,6,180)
         {}
 
 		/// <summary>
@@ -110,7 +110,7 @@ namespace WrenchPlugin.Model
 			set
 			{
 				if (value < _leftOpeningSize.Minimum 
-                    || value < TubeWidth 
+                    || value < TubeWidth.Minimum 
                     || value > _leftOpeningSize.Maximum)
 				{
 					_errorMessage.Add("- Размер зева 1 выходит за предел допустимых значений (4 - 75 мм)");
@@ -125,7 +125,7 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Глубина зева ключа 1
 		/// </summary>
-		public double LeftOpeningDepth
+		public Parameter LeftOpeningDepth
 		{
 			get	=> _leftOpeningDepth;
 			set
@@ -145,7 +145,7 @@ namespace WrenchPlugin.Model
 		/// Ширина зева ключа 2
 		/// </summary>
 		/// 		
-		public double RightOpeningSize
+		public Parameter RightOpeningSize
 		{
 			get => _rightOpeningSize;
 			set
@@ -156,7 +156,9 @@ namespace WrenchPlugin.Model
 					_errorMessage.Add("- Размер зева 2 выходит за предел допустимых значений (5 - 80 мм)");
 				}
 				else
-				_rightOpeningSize = value;
+				{
+					_rightOpeningSize = value;
+				}
 			}
 		}
 
@@ -164,7 +166,7 @@ namespace WrenchPlugin.Model
 		/// Глубина зева ключа 2
 		/// </summary>
 		/// 		
-		public double RightOpeningDepth
+		public Parameter RightOpeningDepth
 		{
 			get => _rightOpeningDepth;
 			set
@@ -174,14 +176,17 @@ namespace WrenchPlugin.Model
 					_errorMessage.Add("- Глубина зева 2 выходит за предел допустимых значений (2.5 - 50 мм)");
 				}
 				else
-				_rightOpeningDepth = value;
+				{
+					_rightOpeningDepth = value;
+				}
+				
 			}
 		}
 
 		/// <summary>
 		/// Толщина стенок ключа
 		/// </summary>
-		public double WallThickness
+		public Parameter WallThickness
 		{
 			get => _wallThickness;
 			set
@@ -198,7 +203,7 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Ширина трубки ключа
 		/// </summary>
-		public double TubeWidth
+		public Parameter TubeWidth
 		{
 			get => _tubeWidth;
 			set
@@ -219,7 +224,7 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Диаметр отверстий ключа
 		/// </summary>
-		public double HolesDiameter
+		public Parameter HolesDiameter
 		{
 			get => _holesDiameter;
 			set
@@ -241,7 +246,7 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Длина ключа
 		/// </summary>
-		public double WrenchLength
+		public Parameter WrenchLength
 		{
 			get => _wrenchLength;
 			set
@@ -258,6 +263,20 @@ namespace WrenchPlugin.Model
 				}
 				else
 				_wrenchLength = value;
+			}
+		}
+
+		private bool CheckMinMax(Parameter parameter)
+		{
+			if (parameter.Value < parameter.Minimum || parameter.Value < parameter.Maximum)
+			{
+				_errorMessage.Add($"Значение должно находиться в диапазоне " +
+					$"от {parameter.Minimum} до {parameter.Maximum} мм");
+				return true;
+			}
+			else
+			{
+				return false;
 			}
 		}
 	}

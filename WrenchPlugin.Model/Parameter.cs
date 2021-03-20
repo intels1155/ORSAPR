@@ -14,9 +14,13 @@ namespace WrenchPlugin.Model
 
         public double Value { get; set; }
 
+		public string ParameterName { get; set; }
+
         public Parameter(double minimum, double maximum, double value)
         {
             Minimum = minimum;
+			Maximum = maximum;
+			Value = value;
         }
     }
 }
