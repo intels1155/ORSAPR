@@ -51,9 +51,6 @@ namespace WrenchPlugin.Model
 		/// </summary>
 		private Parameter _wrenchLength;
 
-		// Список ошибок в параметрах
-		private List<string> _errorMessage = new List<string>();
-
 		/// <summary>
 		/// Конструктор класса WrenchParameters
 		/// </summary>
@@ -76,30 +73,19 @@ namespace WrenchPlugin.Model
 			double wrenchLength)
 		{
 
-			LeftOpeningSize = new Parameter(5, 40, leftOpeningSize);
-			LeftOpeningDepth = new Parameter(2, 50, leftOpeningDepth);
-			RightOpeningSize = new Parameter(5, 80, rightOpeningSize);
-			RightOpeningDepth = new Parameter(2.5, 50, rightOpeningDepth);
-			WallThickness = new Parameter(2, 14, wallThickness);
-			TubeWidth = new Parameter(4, 75, tubeWidth);
-			HolesDiameter = new Parameter(2, 40, holesDiameter);
-			WrenchLength = new Parameter(80, 400, wrenchLength);
+			LeftOpeningSize = new Parameter("Размер зева 1", 4, 70, leftOpeningSize);
+			LeftOpeningDepth = new Parameter("Глубина зева 1", 2, 50, leftOpeningDepth);
+			RightOpeningSize = new Parameter("Размер зева 2", 5, 80, rightOpeningSize);
+			RightOpeningDepth = new Parameter("Глубина зева 1", 2.5, 50, rightOpeningDepth);
+			WallThickness = new Parameter("Толщина стенки ключа", 2, 14, wallThickness);
+			TubeWidth = new Parameter("Ширина трубки ключа", 4, 75, tubeWidth);
+			HolesDiameter = new Parameter("Диаметр отверстий ключа", 2, 40, holesDiameter);
+			WrenchLength = new Parameter("Длина ключа", 80, 400, wrenchLength);
 			ValuesValidationErrors();
 		}
 
 		public WrenchParameters():this(16,24,18,26,4,14,6,180)
         {}
-
-		/// <summary>
-		/// Собрать сообщения об ошибках
-		/// </summary>
-		private void ValuesValidationErrors()
-		{
-			if (_errorMessage.Count > 0)
-			{
-				throw new ArgumentException(string.Join("\n", _errorMessage));
-			}
-		}
 
 		/// <summary>
 		/// Ширина зева ключа 1
@@ -109,16 +95,7 @@ namespace WrenchPlugin.Model
 			get => _leftOpeningSize;
 			set
 			{
-				if (value < _leftOpeningSize.Minimum 
-                    || value < TubeWidth.Minimum 
-                    || value > _leftOpeningSize.Maximum)
-				{
-					_errorMessage.Add("- Размер зева 1 выходит за предел допустимых значений (4 - 75 мм)");
-				}
-                else
-                {
-                    _leftOpeningSize.Value = value;
-                }
+				_leftOpeningSize = value;
 			}
 		}
 
@@ -127,16 +104,9 @@ namespace WrenchPlugin.Model
 		/// </summary>
 		public Parameter LeftOpeningDepth
 		{
-			get	=> _leftOpeningDepth;
+			get => _leftOpeningDepth;
 			set
 			{
-                //TODo: Убрать дублирование
-				if (value < 2 || value > 50)
-				{
-					_errorMessage.Add("- Глубина зева 1 выходит за предел допустимых значений (2 - 50 мм)");
-				}
-				//TODO: RSDN
-				else
 				_leftOpeningDepth = value;
 			}
 		}
@@ -150,15 +120,7 @@ namespace WrenchPlugin.Model
 			get => _rightOpeningSize;
 			set
 			{
-				// диаметр зева не больше трубки ключа
-				if (value < 5 || value < TubeWidth || value > 80)
-				{
-					_errorMessage.Add("- Размер зева 2 выходит за предел допустимых значений (5 - 80 мм)");
-				}
-				else
-				{
-					_rightOpeningSize = value;
-				}
+				_rightOpeningSize = value;
 			}
 		}
 
@@ -171,17 +133,10 @@ namespace WrenchPlugin.Model
 			get => _rightOpeningDepth;
 			set
 			{
-				if (value < 2.5 || value > 50)
-				{
-					_errorMessage.Add("- Глубина зева 2 выходит за предел допустимых значений (2.5 - 50 мм)");
-				}
-				else
-				{
-					_rightOpeningDepth = value;
-				}
-				
+				_rightOpeningDepth = value;
 			}
 		}
+
 
 		/// <summary>
 		/// Толщина стенок ключа
@@ -191,11 +146,6 @@ namespace WrenchPlugin.Model
 			get => _wallThickness;
 			set
 			{
-				if (value < 2 || value > 14)
-				{
-					_errorMessage.Add("- Толщина стенки ключа выходит за предел допустимых значений (2 - 14 мм)");
-				}
-				else
 				_wallThickness = value;
 			}
 		}
@@ -208,15 +158,6 @@ namespace WrenchPlugin.Model
 			get => _tubeWidth;
 			set
 			{
-				if (value < 4 || value > 75)
-				{
-					_errorMessage.Add("- Диаметр трубки ключа выходит за предел допустимых значений (4 - 75 мм)");
-				}
-				if (value > RightOpeningSize || value > LeftOpeningSize)
-				{
-					_errorMessage.Add("- Диаметр трубки ключа не может быть больше размера зевов");
-				}
-				else
 				_tubeWidth = value;
 			}
 		}
@@ -229,16 +170,6 @@ namespace WrenchPlugin.Model
 			get => _holesDiameter;
 			set
 			{
-				// диаметр отверстий не больше 0.75 * диаметр трубки ключа
-				if (value < 2 || value > 40)
-				{
-					_errorMessage.Add("- Диаметр отверстий ключа выходит за предел допустимых значений (2 - 40 мм)");
-				}
-				else if (value > 0.75 * TubeWidth)
-				{
-					_errorMessage.Add("- Диаметр отверстий ключа не может превышать 0.75 от диаметра трубки");
-				}
-				else
 				_holesDiameter = value;
 			}
 		}
@@ -251,32 +182,41 @@ namespace WrenchPlugin.Model
 			get => _wrenchLength;
 			set
 			{
-				double minLength = (LeftOpeningDepth + RightOpeningDepth + HolesDiameter) * 2;
-				if (value < 80 || value > 400)
-				{
-					_errorMessage.Add("- Длина ключа выходит за предел допустимых значений (80 - 400 мм)");
-				}
-				else if (value < minLength)
-				{
-					_errorMessage.Add("- Длина ключа при данном диаметре отверстий и глубине зевов должна составлять как минимум " 
-						+ minLength + " мм");
-				}
-				else
 				_wrenchLength = value;
 			}
 		}
 
-		private bool CheckMinMax(Parameter parameter)
+		/// <summary>
+		/// Собрать сообщения об ошибках в зависимых параметрах
+		/// </summary>
+		private void ValuesValidationErrors()
 		{
-			if (parameter.Value < parameter.Minimum || parameter.Value < parameter.Maximum)
+			List<string> _errorMessage = new List<string>();
+
+			if (TubeWidth.Value > RightOpeningSize.Value || TubeWidth.Value > LeftOpeningSize.Value)
 			{
-				_errorMessage.Add($"Значение должно находиться в диапазоне " +
-					$"от {parameter.Minimum} до {parameter.Maximum} мм");
-				return true;
+				_errorMessage.Add("- Ширина трубки ключа не может быть больше размера зевов");
 			}
-			else
+
+			const double miminalDiameterCoefficient = 0.75;
+			double minimalDiameter = miminalDiameterCoefficient * TubeWidth.Value;
+			if (HolesDiameter.Value > minimalDiameter)
 			{
-				return false;
+				_errorMessage.Add("- Диаметр отверстий ключа не может превышать 0.75 от диаметра трубки");
+			}
+
+			const double minimalLengthCoefficient = 2;
+			double minimalLength = (LeftOpeningDepth.Value + RightOpeningDepth.Value + HolesDiameter.Value) 
+				* minimalLengthCoefficient;
+			if (WrenchLength.Value < minimalLength)
+			{
+				_errorMessage.Add("- Длина ключа при данном диаметре отверстий и глубине зевов " +
+					"должна составлять как минимум " + minimalLength + " мм");
+			}
+
+			if (_errorMessage.Count > 0)
+			{
+				throw new ArgumentException(string.Join("\n", _errorMessage));
 			}
 		}
 	}

@@ -56,9 +56,9 @@ namespace WrenchPlugin.UI
 		/// <param name="e"></param>
 		private void defaultParamComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			var tmpParams = new WrenchParameters();
 			if (defaultParamComboBox.SelectedIndex == 0) // параметры для демонстрации (по умолчанию)
 			{
-				var tmpParams = new WrenchParameters();
 				leftOpenSizeNum.Value = (decimal) tmpParams.LeftOpeningSize.Value;
 				leftOpenDepthNum.Value = (decimal)tmpParams.LeftOpeningDepth.Value;
 				rightOpenSizeNum.Value = (decimal)tmpParams.RightOpeningSize.Value;
@@ -70,25 +70,25 @@ namespace WrenchPlugin.UI
 			}
 			if (defaultParamComboBox.SelectedIndex == 1) // выбор минимальных параметров
 			{
-				foreach (Control c in ParameterBox.Controls)
-				{
-					if (c.GetType() == typeof(NumericUpDown))
-					{
-						NumericUpDown num = c as NumericUpDown;
-						num.Value = num.Minimum;
-					}
-				}
+				leftOpenSizeNum.Value = (decimal)tmpParams.LeftOpeningSize.Minimum;
+				leftOpenDepthNum.Value = (decimal)tmpParams.LeftOpeningDepth.Minimum;
+				rightOpenSizeNum.Value = (decimal)tmpParams.RightOpeningSize.Minimum;
+				rightOpenDepthNum.Value = (decimal)tmpParams.RightOpeningDepth.Minimum;
+				wallThicknessNum.Value = (decimal)tmpParams.WallThickness.Minimum;
+				tubeWidthNum.Value = (decimal)tmpParams.TubeWidth.Minimum;
+				holesDiameterNum.Value = (decimal)tmpParams.HolesDiameter.Minimum;
+				wrenchLengthNum.Value = (decimal)tmpParams.WrenchLength.Minimum;
 			}
 			if (defaultParamComboBox.SelectedIndex == 2) // выбор максимальных параметров
 			{
-				foreach (Control c in ParameterBox.Controls)
-				{
-					if (c.GetType() == typeof(NumericUpDown))
-					{
-						NumericUpDown num = c as NumericUpDown;
-						num.Value = num.Maximum; 
-					}
-				}
+				leftOpenSizeNum.Value = (decimal)tmpParams.LeftOpeningSize.Maximum;
+				leftOpenDepthNum.Value = (decimal)tmpParams.LeftOpeningDepth.Maximum;
+				rightOpenSizeNum.Value = (decimal)tmpParams.RightOpeningSize.Maximum;
+				rightOpenDepthNum.Value = (decimal)tmpParams.RightOpeningDepth.Maximum;
+				wallThicknessNum.Value = (decimal)tmpParams.WallThickness.Maximum;
+				tubeWidthNum.Value = (decimal)tmpParams.TubeWidth.Maximum;
+				holesDiameterNum.Value = (decimal)tmpParams.HolesDiameter.Maximum;
+				wrenchLengthNum.Value = (decimal)tmpParams.WrenchLength.Maximum;
 			}
 		}
 	}

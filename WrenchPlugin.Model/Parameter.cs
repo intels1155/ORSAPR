@@ -8,19 +8,37 @@ namespace WrenchPlugin.Model
 {
     public class Parameter
     {
-        public double Minimum { get; set; }
+		public string Name { get; set; }
+
+		public double Minimum { get; set; }
 
         public double Maximum { get; set; }
 
-        public double Value { get; set; }
+		private double _value;
 
-		public string ParameterName { get; set; }
-
-        public Parameter(double minimum, double maximum, double value)
+		public Parameter(string name, double minimum, double maximum, double value)
         {
+			Name = name;
             Minimum = minimum;
 			Maximum = maximum;
 			Value = value;
-        }
-    }
+		}
+
+		public double Value
+		{
+			get => _value;
+			set
+			{
+				if (value < Minimum || value > Maximum)
+				{
+					throw new ArgumentException($"- {Name}: размер выходит за диапазон " +
+						$"от {Minimum} до {Maximum} мм");
+				}
+				else
+				{
+					_value = value;
+				}
+			}
+		}
+	}
 }
