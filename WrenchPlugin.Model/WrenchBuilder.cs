@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace WrenchPlugin.Model
 {
+    //TODO: RSDN
 	public class WrenchBuilder
 	{
 		/// <summary>
@@ -151,7 +152,8 @@ namespace WrenchPlugin.Model
 		/// <param name="size">Размер шестиугольника</param>
 		private void DrawHexagon(KompasConnector kompasConnector, ref ksSketchDefinition sketchDef, ref ksDocument2D sketchEdit, double size)
 		{
-			var hexagonParam = (ksRegularPolygonParam)kompasConnector.Kompas.GetParamStruct((short)StructType2DEnum.ko_RegularPolygonParam);
+			var hexagonParam = (ksRegularPolygonParam)kompasConnector
+                .Kompas.GetParamStruct((short)StructType2DEnum.ko_RegularPolygonParam);
 			hexagonParam.ang = 0;
 			hexagonParam.count = 6;
 			// Вписанный многоугольник
@@ -195,7 +197,7 @@ namespace WrenchPlugin.Model
 		/// <param name="plane">Плоскость эскиза</param>
 		/// <param name="centerPointY">Координата Y точки центра окружности отверстия</param>
 		private void CutExtrusion(KompasConnector kompasConnector, WrenchParameters wrenchParameters, 
-		ksEntity plane, double centerPointY)
+		    ksEntity plane, double centerPointY)
 		{
 			double extrusionDepth = wrenchParameters.TubeWidth.Value * 4; 
 
@@ -218,18 +220,19 @@ namespace WrenchPlugin.Model
 			entityCutExtr.Create();
 		}
 
-		/// <summary>
-		/// Эскиз окружности для вырезания
-		/// </summary>
-		/// <param name="kompasConnector">API КОМПАС-3D</param>
-		/// <param name="sketchDef">Интерфейс эскиза</param>
-		/// <param name="size">Диаметр окружности</param>
-		private void CircleSketch(KompasConnector kompasConnector, double diameter, 
-			ref ksSketchDefinition sketchDef, double CenterPointY)
+        /// <summary>
+        /// Эскиз окружности для вырезания
+        /// </summary>
+        /// <param name="kompasConnector">API КОМПАС-3D</param>
+        /// <param name="diameter">Диаметр окружности</param>
+        /// <param name="sketchDef">Интерфейс эскиза</param>
+        /// <param name="centerPointY"></param>
+        private void CircleSketch(KompasConnector kompasConnector, double diameter, 
+			ref ksSketchDefinition sketchDef, double centerPointY)
 		{
 			double radius = diameter / 2;
 			ksDocument2D extrSketchEdit = (ksDocument2D)sketchDef.BeginEdit();
-			extrSketchEdit.ksCircle(CenterPointY, 0, radius, 1);
+			extrSketchEdit.ksCircle(centerPointY, 0, radius, 1);
 		}
 	}
 }

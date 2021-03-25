@@ -11,22 +11,7 @@ namespace WrenchPlugin.Model
 	/// </summary>
 	public class WrenchParameters
 	{
-		/// <summary>
-		/// Ширина зева ключа 1
-		/// </summary>
-		private Parameter _leftOpeningSize;
-
-		/// <summary>
-		/// Глубина зева ключа 1
-		/// </summary>
-		private Parameter _leftOpeningDepth;
-
-		/// <summary>
-		/// Ширина зева ключа 2
-		/// </summary>
-		private Parameter _rightOpeningSize;
-
-		/// <summary>
+        /// <summary>
 		/// Глубина зева ключа 2
 		/// </summary>
 		private Parameter _rightOpeningDepth;
@@ -89,41 +74,20 @@ namespace WrenchPlugin.Model
 		/// <summary>
 		/// Ширина зева ключа 1
 		/// </summary>
-		public Parameter LeftOpeningSize
-		{
-			get => _leftOpeningSize;
-			set
-			{
-				_leftOpeningSize = value;
-			}
-		}
+		public Parameter LeftOpeningSize { get; set; }
 
-		/// <summary>
+        /// <summary>
 		/// Глубина зева ключа 1
 		/// </summary>
-		public Parameter LeftOpeningDepth
-		{
-			get => _leftOpeningDepth;
-			set
-			{
-				_leftOpeningDepth = value;
-			}
-		}
+		public Parameter LeftOpeningDepth { get; set; }
 
-		/// <summary>
+        /// <summary>
 		/// Ширина зева ключа 2
 		/// </summary>
 		/// 		
-		public Parameter RightOpeningSize
-		{
-			get => _rightOpeningSize;
-			set
-			{
-				_rightOpeningSize = value;
-			}
-		}
+		public Parameter RightOpeningSize { get; set; }
 
-		/// <summary>
+        /// <summary>
 		/// Глубина зева ключа 2
 		/// </summary>
 		/// 		
@@ -157,7 +121,8 @@ namespace WrenchPlugin.Model
 			get => _tubeWidth;
 			set
 			{
-				if (value.Value > RightOpeningSize.Value || value.Value > LeftOpeningSize.Value)
+				if (value.Value > RightOpeningSize.Value 
+                    || value.Value > LeftOpeningSize.Value)
 				{
 					throw new ArgumentException($"- {value.Name} не может быть больше размера зевов");
 				}
@@ -202,6 +167,7 @@ namespace WrenchPlugin.Model
 					* minimalLengthCoefficient;
 				if (value.Value < minimalLength)
 				{
+					//TODO: RSDN
 					throw new ArgumentException($"- {value.Name} при данном диаметре отверстий и глубине зевов " +
 						"должна составлять как минимум " + minimalLength + " мм");
 				}

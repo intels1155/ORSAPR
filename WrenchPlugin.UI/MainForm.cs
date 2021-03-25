@@ -27,6 +27,7 @@ namespace WrenchPlugin.UI
 		{
 			try
 			{
+                //TODO: RSDN
 				WrenchParameters _wrenchParameters = new WrenchParameters(
 					(double)leftOpenSizeNum.Value,
 					(double)leftOpenDepthNum.Value,
@@ -57,6 +58,7 @@ namespace WrenchPlugin.UI
 		private void defaultParamComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			var tmpParams = new WrenchParameters();
+			//TODO: switch-case
 			if (defaultParamComboBox.SelectedIndex == 0) // параметры для демонстрации (по умолчанию)
 			{
 				leftOpenSizeNum.Value = (decimal) tmpParams.LeftOpeningSize.Value;

@@ -10,9 +10,9 @@ namespace WrenchPlugin.Model
     {
 		public string Name { get; set; }
 
-		public double Minimum { get; private set; }
+		public double Minimum { get; set; }
 
-        public double Maximum { get; private set; }
+        public double Maximum { get; set; }
 
 		private double _value;
 
