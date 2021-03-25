@@ -21,7 +21,7 @@ namespace WrenchPlugin.UnitTests
 				2, // WallThickness
 				10, // TubeWidth
 				4, // HolesDiameter
-				80 // WrenchLength 18, 18, 14, 14, 2, 10, 4, 80
+				180 // WrenchLength 18, 18, 14, 14, 2, 10, 4, 80
 				);
 		}
 
@@ -36,33 +36,33 @@ namespace WrenchPlugin.UnitTests
 				2, // WallThickness
 				10, // TubeWidth
 				4, // HolesDiameter
-				80 // WrenchLength
+				180 // WrenchLength
 				);
 			var actual = _wrenchParams;
 
 			Assert.AreEqual
-				(expectedParameters.LeftOpeningSize, actual.LeftOpeningSize,
+				(expectedParameters.LeftOpeningSize.Value, actual.LeftOpeningSize.Value,
 				"Некорректное значение LeftOpeningSize");
 			Assert.AreEqual
-				(expectedParameters.LeftOpeningDepth, actual.LeftOpeningDepth,
+				(expectedParameters.LeftOpeningDepth.Value, actual.LeftOpeningDepth.Value,
 				"Некорректное значение LeftOpeningDepth");
 			Assert.AreEqual
-				(expectedParameters.RightOpeningSize, actual.RightOpeningSize,
+				(expectedParameters.RightOpeningSize.Value, actual.RightOpeningSize.Value,
 				"Некорректное значение RightOpeningSize");
 			Assert.AreEqual
-				(expectedParameters.RightOpeningDepth, actual.RightOpeningDepth,
+				(expectedParameters.RightOpeningDepth.Value, actual.RightOpeningDepth.Value,
 				"Некорректное значение RightOpeningDepth");
 			Assert.AreEqual
-				(expectedParameters.WallThickness, actual.WallThickness,
+				(expectedParameters.WallThickness.Value, actual.WallThickness.Value,
 				"Некорректное значение WallThickness");
 			Assert.AreEqual
-				(expectedParameters.TubeWidth, actual.TubeWidth,
+				(expectedParameters.TubeWidth.Value, actual.TubeWidth.Value,
 				"Некорректное значение TubeWidth");
 			Assert.AreEqual
-				(expectedParameters.HolesDiameter, actual.HolesDiameter,
+				(expectedParameters.HolesDiameter.Value, actual.HolesDiameter.Value,
 				"Некорректное значение HolesDiameter");
 			Assert.AreEqual
-				(expectedParameters.WrenchLength, actual.WrenchLength,
+				(expectedParameters.WrenchLength.Value, actual.WrenchLength.Value,
 				"Некорректное значение WrenchLength");
 		}
 
