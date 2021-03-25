@@ -163,7 +163,7 @@ namespace WrenchPlugin.Model
 			get => _tubeWidth;
 			set
 			{
-				if (TubeWidth.Value > RightOpeningSize.Value || TubeWidth.Value > LeftOpeningSize.Value)
+				if (value.Value > RightOpeningSize.Value || value.Value > LeftOpeningSize.Value)
 				{
 					_errorMessage.Add("- Ширина трубки ключа не может быть больше размера зевов");
 				}
@@ -184,7 +184,7 @@ namespace WrenchPlugin.Model
 			{
 				const double minimalDiameterCoefficient = 0.75;
 				double minimalDiameter = minimalDiameterCoefficient * TubeWidth.Value;
-				if (HolesDiameter.Value > minimalDiameter)
+				if (value.Value > minimalDiameter)
 				{
 					_errorMessage.Add("- Диаметр отверстий ключа не может превышать 0.75 от диаметра трубки");
 				}
@@ -206,7 +206,7 @@ namespace WrenchPlugin.Model
 				const double minimalLengthCoefficient = 2;
 				double minimalLength = (LeftOpeningDepth.Value + RightOpeningDepth.Value + HolesDiameter.Value)
 					* minimalLengthCoefficient;
-				if (WrenchLength.Value < minimalLength)
+				if (value.Value < minimalLength)
 				{
 					_errorMessage.Add("- Длина ключа при данном диаметре отверстий и глубине зевов " +
 						"должна составлять как минимум " + minimalLength + " мм");
