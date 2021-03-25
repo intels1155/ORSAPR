@@ -52,11 +52,6 @@ namespace WrenchPlugin.Model
 		private Parameter _wrenchLength;
 
 		/// <summary>
-		/// Cписок ошибок
-		/// </summary>
-		private List<string> _errorMessage = new List<string>();
-
-		/// <summary>
 		/// Конструктор класса WrenchParameters
 		/// </summary>
 		/// <param name="leftOpeningSize">Размер зева 1</param>
@@ -86,7 +81,6 @@ namespace WrenchPlugin.Model
 			TubeWidth = new Parameter("Ширина трубки ключа", 4, 75, tubeWidth);
 			HolesDiameter = new Parameter("Диаметр отверстий ключа", 2, 40, holesDiameter);
 			WrenchLength = new Parameter("Длина ключа", 80, 400, wrenchLength);
-			ValuesValidationErrors();
 		}
 
 		public WrenchParameters():this(16,24,18,26,4,14,6,180)
@@ -165,7 +159,7 @@ namespace WrenchPlugin.Model
 			{
 				if (value.Value > RightOpeningSize.Value || value.Value > LeftOpeningSize.Value)
 				{
-					_errorMessage.Add("- Ширина трубки ключа не может быть больше размера зевов");
+					throw new ArgumentException($"- {value.Name} не может быть больше размера зевов");
 				}
 				else
 				{
@@ -186,12 +180,12 @@ namespace WrenchPlugin.Model
 				double minimalDiameter = minimalDiameterCoefficient * TubeWidth.Value;
 				if (value.Value > minimalDiameter)
 				{
-					_errorMessage.Add("- Диаметр отверстий ключа не может превышать 0.75 от диаметра трубки");
+					throw new ArgumentException($"- {value.Name} не может превышать 0.75 от диаметра трубки");
 				}
 				else
 				{
 					_holesDiameter = value;
-				}	
+				}
 			}
 		}
 
@@ -208,24 +202,13 @@ namespace WrenchPlugin.Model
 					* minimalLengthCoefficient;
 				if (value.Value < minimalLength)
 				{
-					_errorMessage.Add("- Длина ключа при данном диаметре отверстий и глубине зевов " +
+					throw new ArgumentException($"- {value.Name} при данном диаметре отверстий и глубине зевов " +
 						"должна составлять как минимум " + minimalLength + " мм");
 				}
 				else
 				{
 					_wrenchLength = value;
 				}
-			}
-		}
-
-		/// <summary>
-		/// Собрать сообщения об ошибках в зависимых параметрах
-		/// </summary>
-		private void ValuesValidationErrors()
-		{
-			if (_errorMessage.Count > 0)
-			{
-				throw new ArgumentException(string.Join("\n", _errorMessage));
 			}
 		}
 	}
