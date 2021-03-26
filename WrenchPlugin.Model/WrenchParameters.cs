@@ -11,15 +11,6 @@ namespace WrenchPlugin.Model
 	/// </summary>
 	public class WrenchParameters
 	{
-        /// <summary>
-		/// Глубина зева ключа 2
-		/// </summary>
-		private Parameter _rightOpeningDepth;
-
-		/// <summary>
-		/// Толщина стенок ключа
-		/// </summary>
-		private Parameter _wallThickness;
 
 		/// <summary>
 		/// Ширина трубки ключа
@@ -87,31 +78,17 @@ namespace WrenchPlugin.Model
 		/// 		
 		public Parameter RightOpeningSize { get; set; }
 
-        /// <summary>
+		/// <summary>
 		/// Глубина зева ключа 2
 		/// </summary>
 		/// 		
-		public Parameter RightOpeningDepth
-		{
-			get => _rightOpeningDepth;
-			set
-			{
-				_rightOpeningDepth = value;
-			}
-		}
+		public Parameter RightOpeningDepth { get; set; }
 
 
 		/// <summary>
 		/// Толщина стенок ключа
 		/// </summary>
-		public Parameter WallThickness
-		{
-			get => _wallThickness;
-			set
-			{
-				_wallThickness = value;
-			}
-		}
+		public Parameter WallThickness { get; set; }
 
 		/// <summary>
 		/// Ширина трубки ключа
@@ -141,11 +118,12 @@ namespace WrenchPlugin.Model
 			get => _holesDiameter;
 			set
 			{
-				const double minimalDiameterCoefficient = 0.75;
-				double minimalDiameter = minimalDiameterCoefficient * TubeWidth.Value;
+				const double minimalDiameterRatio = 0.75;
+				double minimalDiameter = minimalDiameterRatio * TubeWidth.Value;
 				if (value.Value > minimalDiameter)
 				{
-					throw new ArgumentException($"- {value.Name} не может превышать 0.75 от диаметра трубки");
+					throw new ArgumentException($"- {value.Name} не может превышать " +
+						$"{minimalDiameterRatio} от диаметра трубки");
 				}
 				else
 				{
@@ -163,13 +141,13 @@ namespace WrenchPlugin.Model
 			set
 			{
 				const double minimalLengthCoefficient = 2;
-				double minimalLength = (LeftOpeningDepth.Value + RightOpeningDepth.Value + HolesDiameter.Value)
-					* minimalLengthCoefficient;
+				double minimalLength = (LeftOpeningDepth.Value + RightOpeningDepth.Value 
+					+ HolesDiameter.Value) * minimalLengthCoefficient;
 				if (value.Value < minimalLength)
 				{
 					//TODO: RSDN
-					throw new ArgumentException($"- {value.Name} при данном диаметре отверстий и глубине зевов " +
-						"должна составлять как минимум " + minimalLength + " мм");
+					throw new ArgumentException($"- {value.Name} при данном диаметре отверстий " +
+						$"и глубине зевов должна составлять минимум {minimalLength} мм");
 				}
 				else
 				{

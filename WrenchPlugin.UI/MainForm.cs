@@ -28,7 +28,7 @@ namespace WrenchPlugin.UI
 			try
 			{
                 //TODO: RSDN
-				WrenchParameters _wrenchParameters = new WrenchParameters(
+				WrenchParameters wrenchParameters = new WrenchParameters(
 					(double)leftOpenSizeNum.Value,
 					(double)leftOpenDepthNum.Value,
 					(double)rightOpenSizeNum.Value,
@@ -39,11 +39,10 @@ namespace WrenchPlugin.UI
 					(double)wrenchLengthNum.Value);
 				KompasConnector kompasConnector = new KompasConnector();
 				WrenchBuilder wrenchbuilder = new WrenchBuilder();
-				wrenchbuilder.Build(kompasConnector, _wrenchParameters);
+				wrenchbuilder.Build(kompasConnector, wrenchParameters);
 			}
 			catch (ArgumentException ex)
 			{
-				// Вывод MessageBox со списком ошибок(ex.Message) при наличии несовместимых параметров
 				MessageBox.Show(ex.Message, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
@@ -59,38 +58,38 @@ namespace WrenchPlugin.UI
 		{
 			var tmpParams = new WrenchParameters();
 			//TODO: switch-case
-			if (defaultParamComboBox.SelectedIndex == 0) // параметры для демонстрации (по умолчанию)
+			switch (defaultParamComboBox.SelectedIndex)
 			{
-				leftOpenSizeNum.Value = (decimal) tmpParams.LeftOpeningSize.Value;
-				leftOpenDepthNum.Value = (decimal)tmpParams.LeftOpeningDepth.Value;
-				rightOpenSizeNum.Value = (decimal)tmpParams.RightOpeningSize.Value;
-				rightOpenDepthNum.Value = (decimal)tmpParams.RightOpeningDepth.Value;
-				wallThicknessNum.Value = (decimal)tmpParams.WallThickness.Value;
-				tubeWidthNum.Value = (decimal)tmpParams.TubeWidth.Value;
-				holesDiameterNum.Value = (decimal)tmpParams.HolesDiameter.Value;
-				wrenchLengthNum.Value = (decimal)tmpParams.WrenchLength.Value;
-			}
-			if (defaultParamComboBox.SelectedIndex == 1) // выбор минимальных параметров
-			{
-				leftOpenSizeNum.Value = (decimal)tmpParams.LeftOpeningSize.Minimum;
-				leftOpenDepthNum.Value = (decimal)tmpParams.LeftOpeningDepth.Minimum;
-				rightOpenSizeNum.Value = (decimal)tmpParams.RightOpeningSize.Minimum;
-				rightOpenDepthNum.Value = (decimal)tmpParams.RightOpeningDepth.Minimum;
-				wallThicknessNum.Value = (decimal)tmpParams.WallThickness.Minimum;
-				tubeWidthNum.Value = (decimal)tmpParams.TubeWidth.Minimum;
-				holesDiameterNum.Value = (decimal)tmpParams.HolesDiameter.Minimum;
-				wrenchLengthNum.Value = (decimal)tmpParams.WrenchLength.Minimum;
-			}
-			if (defaultParamComboBox.SelectedIndex == 2) // выбор максимальных параметров
-			{
-				leftOpenSizeNum.Value = (decimal)tmpParams.LeftOpeningSize.Maximum;
-				leftOpenDepthNum.Value = (decimal)tmpParams.LeftOpeningDepth.Maximum;
-				rightOpenSizeNum.Value = (decimal)tmpParams.RightOpeningSize.Maximum;
-				rightOpenDepthNum.Value = (decimal)tmpParams.RightOpeningDepth.Maximum;
-				wallThicknessNum.Value = (decimal)tmpParams.WallThickness.Maximum;
-				tubeWidthNum.Value = (decimal)tmpParams.TubeWidth.Maximum;
-				holesDiameterNum.Value = (decimal)tmpParams.HolesDiameter.Maximum;
-				wrenchLengthNum.Value = (decimal)tmpParams.WrenchLength.Maximum;
+				case 0: // параметры для демонстрации (по умолчанию)
+					leftOpenSizeNum.Value = (decimal)tmpParams.LeftOpeningSize.Value;
+					leftOpenDepthNum.Value = (decimal)tmpParams.LeftOpeningDepth.Value;
+					rightOpenSizeNum.Value = (decimal)tmpParams.RightOpeningSize.Value;
+					rightOpenDepthNum.Value = (decimal)tmpParams.RightOpeningDepth.Value;
+					wallThicknessNum.Value = (decimal)tmpParams.WallThickness.Value;
+					tubeWidthNum.Value = (decimal)tmpParams.TubeWidth.Value;
+					holesDiameterNum.Value = (decimal)tmpParams.HolesDiameter.Value;
+					wrenchLengthNum.Value = (decimal)tmpParams.WrenchLength.Value;
+					break;
+				case 1: // выбор минимальных параметров
+					leftOpenSizeNum.Value = (decimal)tmpParams.LeftOpeningSize.Minimum;
+					leftOpenDepthNum.Value = (decimal)tmpParams.LeftOpeningDepth.Minimum;
+					rightOpenSizeNum.Value = (decimal)tmpParams.RightOpeningSize.Minimum;
+					rightOpenDepthNum.Value = (decimal)tmpParams.RightOpeningDepth.Minimum;
+					wallThicknessNum.Value = (decimal)tmpParams.WallThickness.Minimum;
+					tubeWidthNum.Value = (decimal)tmpParams.TubeWidth.Minimum;
+					holesDiameterNum.Value = (decimal)tmpParams.HolesDiameter.Minimum;
+					wrenchLengthNum.Value = (decimal)tmpParams.WrenchLength.Minimum;
+					break;
+				case 2: // выбор максимальных параметров
+					leftOpenSizeNum.Value = (decimal)tmpParams.LeftOpeningSize.Maximum;
+					leftOpenDepthNum.Value = (decimal)tmpParams.LeftOpeningDepth.Maximum;
+					rightOpenSizeNum.Value = (decimal)tmpParams.RightOpeningSize.Maximum;
+					rightOpenDepthNum.Value = (decimal)tmpParams.RightOpeningDepth.Maximum;
+					wallThicknessNum.Value = (decimal)tmpParams.WallThickness.Maximum;
+					tubeWidthNum.Value = (decimal)tmpParams.TubeWidth.Maximum;
+					holesDiameterNum.Value = (decimal)tmpParams.HolesDiameter.Maximum;
+					wrenchLengthNum.Value = (decimal)tmpParams.WrenchLength.Maximum;
+					break;
 			}
 		}
 	}

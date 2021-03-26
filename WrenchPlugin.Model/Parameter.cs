@@ -6,22 +6,55 @@ using System.Threading.Tasks;
 
 namespace WrenchPlugin.Model
 {
-    public class Parameter
-    {
+	public class Parameter
+	{
 		public string Name { get; set; }
 
-		public double Minimum { get; set; }
+		private double _minimum;
 
-        public double Maximum { get; set; }
+		private double _maximum;
 
 		private double _value;
 
 		public Parameter(string name, double minimum, double maximum, double value)
-        {
+		{
+			
+			if (minimum >= maximum)
+			{
+				throw new ArgumentException($"{name}: максимум параметра меньше или равен минимуму");
+			}
 			Name = name;
-            Minimum = minimum;
+			Minimum = minimum;
 			Maximum = maximum;
 			Value = value;
+		}
+
+		public void CheckRange(string name, double minimum, double maximum, double value)
+		{
+			if (minimum >= maximum)
+			{
+				throw new ArgumentException($"Диапазон параметра '{name}' задан неверно");
+			}
+		}
+
+		public double Minimum
+		{
+			get => _minimum;
+			set
+			{
+				ValidateDouble(value);
+				_minimum = value;
+			}
+		}
+
+		public double Maximum
+		{
+			get => _maximum;
+			set 
+			{
+				ValidateDouble(value);
+				_maximum = value;
+			}
 		}
 
 		public double Value
@@ -29,6 +62,7 @@ namespace WrenchPlugin.Model
 			get => _value;
 			set
 			{
+				ValidateDouble(value);
 				if (value < Minimum || value > Maximum)
 				{
 					throw new ArgumentException($"- {Name}: размер выходит за диапазон " +
@@ -38,6 +72,18 @@ namespace WrenchPlugin.Model
 				{
 					_value = value;
 				}
+			}
+		}
+
+		private void ValidateDouble(double value)
+		{
+			if (double.IsNaN(value) || double.IsInfinity(value))
+			{
+				throw new ArgumentException("Значение не является числом");
+			}
+			else if (value <= 0)
+			{
+				throw new ArgumentException("Значение double меньше или равно нулю");
 			}
 		}
 	}
