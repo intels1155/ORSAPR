@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WrenchPlugin.Model;
+using WrenchPlugin.Model.Kompas;
+using WrenchPlugin.Model.Parameters;
 
 namespace WrenchPlugin.UI
 {

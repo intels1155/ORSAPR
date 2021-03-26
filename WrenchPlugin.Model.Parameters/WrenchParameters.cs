@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WrenchPlugin.Model
+namespace WrenchPlugin.Model.Parameters
 {
 	/// <summary>
 	/// Класс параметров ключа.

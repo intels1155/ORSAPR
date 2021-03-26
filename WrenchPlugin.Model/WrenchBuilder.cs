@@ -1,15 +1,11 @@
-﻿using System;
-using Kompas6API5;
+﻿using Kompas6API5;
 using Kompas6Constants;
 using Kompas6Constants3D;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WrenchPlugin.Model.Parameters;
 
-namespace WrenchPlugin.Model
+namespace WrenchPlugin.Model.Kompas
 {
-    //TODO: RSDN
+	//TODO: RSDN
 	public class WrenchBuilder
 	{
 		/// <summary>

@@ -2,7 +2,7 @@
 using Kompas6API5;
 using Kompas6Constants3D;
 
-namespace WrenchPlugin.Model
+namespace WrenchPlugin.Model.Kompas
 {
 	/// <summary>
 	/// Класс для подключения к САПР КОМПАС-3D

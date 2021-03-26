@@ -61,9 +61,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WrenchPlugin.Model\WrenchPlugin.Model.csproj">
+    <ProjectReference Include="..\WrenchPlugin.Model.Parameters\WrenchPlugin.Model.Parameters.csproj">
+      <Project>{38299af7-b9f7-4ec1-a56c-3a6aad980294}</Project>
+      <Name>WrenchPlugin.Model.Parameters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WrenchPlugin.Model\WrenchPlugin.Model.Kompas.csproj">
       <Project>{9b9f4ea5-891a-4734-9116-bdead015a5af}</Project>
-      <Name>WrenchPlugin.Model</Name>
+      <Name>WrenchPlugin.Model.Kompas</Name>
     </ProjectReference>
     <ProjectReference Include="..\WrenchPlugin.UI\WrenchPlugin.UI.csproj">
       <Project>{91a2a655-ea67-4dd5-962b-e7fdf4e02bf1}</Project>
