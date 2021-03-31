@@ -9,7 +9,15 @@ namespace WrenchPlugin.UnitTests
 	[TestFixture]
 	public class WrenchTests
 	{
+		/// <summary>
+		/// Параметры ключа
+		/// </summary>
 		private WrenchParameters _wrenchParams;
+
+		/// <summary>
+		/// Параметр
+		/// </summary>
+		private Parameter _parameter;
 
 		[SetUp]
 		public void Setup()
@@ -24,12 +32,13 @@ namespace WrenchPlugin.UnitTests
 				4, // HolesDiameter
 				180 // WrenchLength 18, 18, 14, 14, 2, 10, 4, 80
 				);
+			_parameter = new Parameter("Имя параметра", 0.5, 10.5, 5);
 		}
 
 		[Test(Description = "Позитивный тест конструктора класса WrenchParameters")]
 		public void TestWrenchParameters_CorrectValue()
 		{
-			var expectedParameters = new WrenchParameters(
+			var expectedWrenchParameters = new WrenchParameters(
 				18, // LeftOpeningSize
 				18, // LefttOpeningDepth
 				14, // RightOpeningSize
@@ -42,29 +51,49 @@ namespace WrenchPlugin.UnitTests
 			var actual = _wrenchParams;
 
 			Assert.AreEqual
-				(expectedParameters.LeftOpeningSize.Value, actual.LeftOpeningSize.Value,
+				(expectedWrenchParameters.LeftOpeningSize.Value, actual.LeftOpeningSize.Value,
 				"Некорректное значение LeftOpeningSize");
 			Assert.AreEqual
-				(expectedParameters.LeftOpeningDepth.Value, actual.LeftOpeningDepth.Value,
+				(expectedWrenchParameters.LeftOpeningDepth.Value, actual.LeftOpeningDepth.Value,
 				"Некорректное значение LeftOpeningDepth");
 			Assert.AreEqual
-				(expectedParameters.RightOpeningSize.Value, actual.RightOpeningSize.Value,
+				(expectedWrenchParameters.RightOpeningSize.Value, actual.RightOpeningSize.Value,
 				"Некорректное значение RightOpeningSize");
 			Assert.AreEqual
-				(expectedParameters.RightOpeningDepth.Value, actual.RightOpeningDepth.Value,
+				(expectedWrenchParameters.RightOpeningDepth.Value, actual.RightOpeningDepth.Value,
 				"Некорректное значение RightOpeningDepth");
 			Assert.AreEqual
-				(expectedParameters.WallThickness.Value, actual.WallThickness.Value,
+				(expectedWrenchParameters.WallThickness.Value, actual.WallThickness.Value,
 				"Некорректное значение WallThickness");
 			Assert.AreEqual
-				(expectedParameters.TubeWidth.Value, actual.TubeWidth.Value,
+				(expectedWrenchParameters.TubeWidth.Value, actual.TubeWidth.Value,
 				"Некорректное значение TubeWidth");
 			Assert.AreEqual
-				(expectedParameters.HolesDiameter.Value, actual.HolesDiameter.Value,
+				(expectedWrenchParameters.HolesDiameter.Value, actual.HolesDiameter.Value,
 				"Некорректное значение HolesDiameter");
 			Assert.AreEqual
-				(expectedParameters.WrenchLength.Value, actual.WrenchLength.Value,
+				(expectedWrenchParameters.WrenchLength.Value, actual.WrenchLength.Value,
 				"Некорректное значение WrenchLength");
+		}
+
+		[Test(Description = "Позитивный тест конструктора класса Parameter")]
+		public void TestParameter_CorrectValue()
+		{
+			var expectedParameter = new Parameter("Имя параметра", 0.5, 10.5, 5);
+			var actual = _parameter;
+
+			Assert.AreEqual
+				(expectedParameter.Name, actual.Name, 
+				"Некорректное значение LeftOpeningSize");
+			Assert.AreEqual
+				(expectedParameter.Minimum, actual.Minimum,
+				"Некорректное значение LeftOpeningSize");
+			Assert.AreEqual
+				(expectedParameter.Maximum, actual.Maximum,
+				"Некорректное значение LeftOpeningSize");
+			Assert.AreEqual
+				(expectedParameter.Value, actual.Value,
+				"Некорректное значение LeftOpeningSize");
 		}
 
 		// LeftOpeningSize
@@ -127,11 +156,12 @@ namespace WrenchPlugin.UnitTests
 		  TestName = "Негативный тест WrenchLength > max (400)")]
 		[TestCase(18, 30, 14, 20, 2, 10, 4, 107, "HolesDiameter",
 		  TestName = "Негативный тест WrenchLength > ((LeftOpDepth + RightOpDepth + HolesDiam) * 2) ((30+20+4)*2)")]
-        //TODO: RSDN
-		public void TestWrenchParameters_ArgumentValue
-		(double rightOpeningSize, double rightOpeningDepth, double leftOpeningSize,
-		  double leftOpeningDepth, double wallThickness, double tubeWidth,
-		  double holesDiameter, double wrenchLength, string attr)
+        
+		//TODO: RSDN
+		public void TestWrenchParameters_ArgumentValue(double rightOpeningSize, 
+			double rightOpeningDepth, double leftOpeningSize, double leftOpeningDepth, 
+			double wallThickness, double tubeWidth, double holesDiameter, 
+			double wrenchLength, string attr)
 		{
 			Assert.Throws<ArgumentException>(
 				() =>
@@ -145,6 +175,25 @@ namespace WrenchPlugin.UnitTests
 					tubeWidth,
 					holesDiameter,
 					wrenchLength);
+				},
+				"Должно возникнуть исключение, если значение поля "
+				+ attr + "выходит за диапазон допустимых значений");
+		}
+
+		[TestCase("Имя параметра", 0, 10, 5, "Minimum",
+		  TestName = "Негативный тест минимума параметра")]
+		[TestCase("Имя параметра", 1, 5, 0, "Maximum",
+		  TestName = "Негативный тест максимума параметра")]
+		[TestCase("Имя параметра", 1, 5, 6, "Value",
+		  TestName = "Негативный тест максимума параметра")]
+
+		public void TestParameter_ArgumentValue(string name, double minimum, 
+			double maximum, double value, string attr)
+		{
+			Assert.Throws<ArgumentException>(
+				() =>
+				{
+					var parameter = new Parameter(name, minimum, maximum, value);
 				},
 				"Должно возникнуть исключение, если значение поля "
 				+ attr + "выходит за диапазон допустимых значений");
