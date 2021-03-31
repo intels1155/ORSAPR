@@ -128,39 +128,26 @@ namespace WrenchPlugin.UnitTests
 		[TestCase(18, 30, 14, 20, 2, 10, 4, 107, "HolesDiameter",
 		  TestName = "Негативный тест WrenchLength > ((LeftOpDepth + RightOpDepth + HolesDiam) * 2) ((30+20+4)*2)")]
         //TODO: RSDN
-		public void TestWrenchParametrs_ArgumentValue
-		(double RightOpeningSize, double RightOpeningDepth, double LeftOpeningSize,
-		  double LeftOpeningDepth, double WallThickness, double TubeWidth,
-		  double HolesDiameter, double WrenchLength, string attr)
+		public void TestWrenchParameters_ArgumentValue
+		(double rightOpeningSize, double rightOpeningDepth, double leftOpeningSize,
+		  double leftOpeningDepth, double wallThickness, double tubeWidth,
+		  double holesDiameter, double wrenchLength, string attr)
 		{
 			Assert.Throws<ArgumentException>(
 				() =>
 				{
 					var parameters = new WrenchParameters
-					(RightOpeningSize,
-					RightOpeningDepth,
-					LeftOpeningSize,
-					LeftOpeningDepth,
-					WallThickness,
-					TubeWidth,
-					HolesDiameter,
-					WrenchLength);
+					(rightOpeningSize,
+					rightOpeningDepth,
+					leftOpeningSize,
+					leftOpeningDepth,
+					wallThickness,
+					tubeWidth,
+					holesDiameter,
+					wrenchLength);
 				},
 				"Должно возникнуть исключение, если значение поля "
 				+ attr + "выходит за диапазон допустимых значений");
 		}
-
-		/*
-		[TestCase(2, "Исключение, если число меньше граничных значений",
-		TestName = "Присвоение меньшего числа - LeftOpeningSize")]
-		[TestCase(90, "Исключение, если число больше граничных значений",
-		TestName = "Присвоение большего числа - LeftOpeningSize")]
-		public void TestLeftOpeningSize_ArgumentException(double wrongParam, string message)
-		{
-			Assert.Throws<ArgumentException>(
-				() => { _wrenchParams.LeftOpeningSize = wrongParam; },
-				message);
-		}
-		*/
 	}
 }

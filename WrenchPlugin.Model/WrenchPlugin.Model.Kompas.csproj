@@ -7,8 +7,8 @@
     <ProjectGuid>{9B9F4EA5-891A-4734-9116-BDEAD015A5AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WrenchPlugin.Model</RootNamespace>
-    <AssemblyName>WrenchPlugin.Model</AssemblyName>
+    <RootNamespace>WrenchPlugin.Model.Kompas</RootNamespace>
+    <AssemblyName>WrenchPlugin.Model.Kompas</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

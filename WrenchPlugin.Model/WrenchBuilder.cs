@@ -24,7 +24,8 @@ namespace WrenchPlugin.Model.Kompas
 		/// </summary>
 		/// <param name="kompasConnector">API КОМПАС-3D</param>
 		/// <param name="wrenchParameters">Параметры ключа</param>
-		private void CreateMain(KompasConnector kompasConnector, WrenchParameters wrenchParameters)
+		private void CreateMain(KompasConnector kompasConnector, 
+			WrenchParameters wrenchParameters)
 		{
 			// Начальная плоскость
 			ksEntity currentPlane = (ksEntity)kompasConnector
@@ -81,18 +82,16 @@ namespace WrenchPlugin.Model.Kompas
 		/// </summary>
 		/// <param name="kompasConnector">API КОМПАС-3D</param>
 		/// <param name="wrenchParameters">Параметры ключа</param>
-		private void CutExtrusionHoles(KompasConnector kompasConnector, WrenchParameters wrenchParameters)
+		private void CutExtrusionHoles(KompasConnector kompasConnector, 
+			WrenchParameters wrenchParameters)
 		{
 			double circleRadius = wrenchParameters.HolesDiameter.Value / 2;
-
-			const double pointY1Ratio = 2;
-			const double pointY2Ratio = 1.75;
-
+			const double pointYRatio = 2;
 			// Координаты Y центра отверстий
 			double pointY1 = -(wrenchParameters.LeftOpeningDepth.Value 
-				* pointY1Ratio + circleRadius);
+				* pointYRatio + circleRadius);
 			double pointY2 = -(wrenchParameters.WrenchLength.Value -
-					(wrenchParameters.RightOpeningDepth.Value * pointY2Ratio) 
+					(wrenchParameters.RightOpeningDepth.Value * pointYRatio) 
 					- circleRadius);
 
 			double[] centerPointY = {
@@ -100,13 +99,11 @@ namespace WrenchPlugin.Model.Kompas
 				pointY2
 			};
 
-			// Плоскости XOZ, XOY
 			ksEntity[] defaultPlanes = {
 				(ksEntity)kompasConnector.Part.GetDefaultEntity((short)Obj3dType.o3d_planeXOZ),
 				(ksEntity)kompasConnector.Part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY)
 			};
 
-			// Вырезание
 			for (int i = 0; i < defaultPlanes.Length; i++)
 			{
 				CutExtrusion(kompasConnector, wrenchParameters, defaultPlanes[i], 
@@ -123,13 +120,14 @@ namespace WrenchPlugin.Model.Kompas
 		/// <param name="offset">Расстояние до новой плоскости</param>
 		/// <param name="size">Размер шестиугольника</param>
 		/// <returns>Эскиз шестиугольника</returns>
-		private ksEntity CreateHexSketch(KompasConnector kompasConnector, out ksEntity sketch, 
-			 ref ksEntity currentPlane, double offset, double size)
+		private ksEntity CreateHexSketch(KompasConnector kompasConnector, 
+			out ksEntity sketch, ref ksEntity currentPlane, double offset, double size)
 		{
 			ksEntity newPlane = (ksEntity)kompasConnector
 				.Part.NewEntity((short)Obj3dType.o3d_planeOffset);
 			ksPlaneOffsetDefinition newPlaneDefinition = (ksPlaneOffsetDefinition)newPlane
 				.GetDefinition();
+
 			// начальная позиция плоскости: от предыдущей
 			newPlaneDefinition.SetPlane(currentPlane); 
 			newPlaneDefinition.direction = true;
@@ -158,6 +156,7 @@ namespace WrenchPlugin.Model.Kompas
 		{
 			var hexagonParam = (ksRegularPolygonParam)kompasConnector
                 .Kompas.GetParamStruct((short)StructType2DEnum.ko_RegularPolygonParam);
+
 			hexagonParam.ang = 0;
 			hexagonParam.count = 6;
 			// Вписанный многоугольник
@@ -178,11 +177,13 @@ namespace WrenchPlugin.Model.Kompas
 		/// <param name="sketch1">Эскиз сечения 1</param>
 		/// <param name="sketch2">Эскиз сечения 2</param>
 		/// <param name="thickness">Толщина стенки ключа</param>
-		private void CreateLoftElement(KompasConnector kompasConnector, ksEntity sketch1, 
-			ksEntity sketch2, double thickness)
+		private void CreateLoftElement(KompasConnector kompasConnector, 
+			ksEntity sketch1, ksEntity sketch2, double thickness)
 		{
-			var loftElement = (ksEntity)kompasConnector.Part.NewEntity((short)Obj3dType.o3d_baseLoft);
+			var loftElement = (ksEntity)kompasConnector
+				.Part.NewEntity((short)Obj3dType.o3d_baseLoft);
 			var baseLoftDefinition = (ksBaseLoftDefinition)loftElement.GetDefinition();
+
 			// Параметры операции по сечениям: замкнутость траектории, 
 			// резерв для дальн. использования, авто. форм. траектории
 			baseLoftDefinition.SetLoftParam(false, true, true);
@@ -203,8 +204,8 @@ namespace WrenchPlugin.Model.Kompas
 		/// <param name="wrenchParameters">Параметры ключа</param>
 		/// <param name="plane">Плоскость эскиза</param>
 		/// <param name="centerPointY">Координата Y центра отверстия</param>
-		private void CutExtrusion(KompasConnector kompasConnector, WrenchParameters wrenchParameters, 
-		    ksEntity plane, double centerPointY)
+		private void CutExtrusion(KompasConnector kompasConnector, 
+			WrenchParameters wrenchParameters, ksEntity plane, double centerPointY)
 		{
 			double extrusionDepth = wrenchParameters.TubeWidth.Value * 4; 
 
@@ -225,7 +226,7 @@ namespace WrenchPlugin.Model.Kompas
 			cutExtrDef.SetSketch(extrusionSketch);
 			cutExtrDef.directionType = (short)Direction_Type.dtMiddlePlane;
 			// Вырезание от средней плоскости через всю деталь
-			cutExtrDef.SetSideParam(true, (short)End_Type.etThroughAll, extrusionDepth, 0, false); 
+			cutExtrDef.SetSideParam(true, (short)End_Type.etThroughAll, extrusionDepth, 0, false);
 			cutExtrDef.SetThinParam(false, 0, 0, 0);
 			entityCutExtr.Create();
 		}
