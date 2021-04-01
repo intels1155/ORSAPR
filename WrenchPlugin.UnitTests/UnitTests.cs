@@ -84,81 +84,79 @@ namespace WrenchPlugin.UnitTests
 
 			Assert.AreEqual
 				(expectedParameter.Name, actual.Name, 
-				"Некорректное значение LeftOpeningSize");
+				"Некорректное значение Name");
 			Assert.AreEqual
 				(expectedParameter.Minimum, actual.Minimum,
-				"Некорректное значение LeftOpeningSize");
+				"Некорректное значение Minimum");
 			Assert.AreEqual
 				(expectedParameter.Maximum, actual.Maximum,
-				"Некорректное значение LeftOpeningSize");
+				"Некорректное значение Maximum");
 			Assert.AreEqual
 				(expectedParameter.Value, actual.Value,
-				"Некорректное значение LeftOpeningSize");
+				"Некорректное значение Value");
 		}
 
 		// LeftOpeningSize
-		[TestCase(3, 18, 14, 14, 2, 10, 4, 80, "LeftOpeningSize",
+		[TestCase(3, 18, 14, 14, 2, 10, 4, 80, nameof(WrenchParameters.LeftOpeningSize),
 		  TestName = "Негативный тест LeftOpeningSize < min (4)")]
-		[TestCase(76, 18, 14, 14, 2, 10, 4, 80, "LeftOpeningSize",
+		[TestCase(76, 18, 14, 14, 2, 10, 4, 80, nameof(WrenchParameters.LeftOpeningSize),
 		  TestName = "Негативный тест LeftOpeningSize > max (75)")]
-		[TestCase(12, 12, 14, 14, 2, 14, 4, 80, "LeftOpeningSize",
+		[TestCase(12, 12, 14, 14, 2, 14, 4, 80, nameof(WrenchParameters.LeftOpeningSize),
 		  TestName = "Негативный тест LeftOpeningSize (12) < TubeWidth (14)")]
 
 		// LeftOpeningDepth
-		[TestCase(18, 1, 14, 14, 2, 10, 4, 80, "LeftOpeningDepth",
+		[TestCase(18, 1, 14, 14, 2, 10, 4, 80, nameof(WrenchParameters.LeftOpeningDepth),
 		  TestName = "Негативный тест LeftOpeningDepth < min (2)")]
-		[TestCase(18, 51, 14, 14, 2, 10, 4, 80, "LeftOpeningDepth",
+		[TestCase(18, 51, 14, 14, 2, 10, 4, 80, nameof(WrenchParameters.LeftOpeningDepth),
 		  TestName = "Негативный тест LeftOpeningDepth > max (50)")]
 
 		// RightOpeningSize
-		[TestCase(18, 18, 4, 14, 2, 10, 4, 80, "RightOpeningSize",
+		[TestCase(18, 18, 4, 14, 2, 10, 4, 80, nameof(WrenchParameters.RightOpeningSize),
 		  TestName = "Негативный тест RightOpeningSize < min (5)")]
-		[TestCase(18, 18, 81, 14, 2, 10, 4, 80, "RightOpeningSize",
+		[TestCase(18, 18, 81, 14, 2, 10, 4, 80, nameof(WrenchParameters.RightOpeningSize),
 		  TestName = "Негативный тест RightOpeningSize > max (80)")]
-		[TestCase(18, 18, 14, 14, 2, 16, 4, 80, "RightOpeningSize",
+		[TestCase(18, 18, 14, 14, 2, 16, 4, 80, nameof(WrenchParameters.RightOpeningSize),
 		  TestName = "Негативный тест RightOpeningSize (14) < TubeWidth (16)")]
 
 		// RightOpeningDepth
-		[TestCase(18, 18, 14, 2, 2, 10, 4, 80, "LeftOpeningDepth",
+		[TestCase(18, 18, 14, 2, 2, 10, 4, 80, nameof(WrenchParameters.RightOpeningDepth),
 		  TestName = "Негативный тест RightOpeningDepth < min (2.5)")]
-		[TestCase(18, 18, 14, 51, 2, 10, 4, 80, "RightOpeningDepth",
+		[TestCase(18, 18, 14, 51, 2, 10, 4, 80, nameof(WrenchParameters.RightOpeningDepth),
 		  TestName = "Негативный тест RightOpeningDepth > max (50)")]
 		
 		// WallThickness
-		[TestCase(18, 18, 14, 14, 1, 10, 4, 80, "WallThickness",
+		[TestCase(18, 18, 14, 14, 1, 10, 4, 80, nameof(WrenchParameters.WallThickness),
 		  TestName = "Негативный тест WallThickness < min (2)")]
-		[TestCase(18, 18, 14, 14, 15, 10, 4, 80, "WallThickness",
+		[TestCase(18, 18, 14, 14, 15, 10, 4, 80, nameof(WrenchParameters.WallThickness),
 		  TestName = "Негативный тест WallThickness > max (14)")]
 
 		// TubeWidth
-		[TestCase(18, 18, 14, 14, 2, 19, 4, 80, "TubeWidth",
+		[TestCase(18, 18, 14, 14, 2, 19, 4, 80, nameof(WrenchParameters.TubeWidth),
 		  TestName = "Негативный тест TubeWidth > LeftOpeningSize")]
-		[TestCase(18, 18, 14, 14, 2, 20, 4, 80, "TubeWidth",
+		[TestCase(18, 18, 14, 14, 2, 20, 4, 80, nameof(WrenchParameters.TubeWidth),
 		  TestName = "Негативный тест TubeWidth > RightOpeningSize")]
-		[TestCase(18, 18, 14, 14, 2, 3, 4, 80, "TubeWidth",
+		[TestCase(18, 18, 14, 14, 2, 3, 4, 80, nameof(WrenchParameters.TubeWidth),
 		  TestName = "Негативный тест TubeWidth < min (4)")]
-		[TestCase(75, 18, 80, 14, 2, 76, 4, 80, "TubeWidth",
+		[TestCase(75, 18, 80, 14, 2, 76, 4, 80, nameof(WrenchParameters.TubeWidth),
 		  TestName = "Негативный тест TubeWidth > max (75)")]
 
-		//HolesDiameter : 3 случая - > min(2), > max(40), > 0,75*TubeWidth
-		[TestCase(18, 18, 14, 14, 2, 10, 1, 80, "HolesDiameter",
+		// HolesDiameter : 3 случая - > min(2), > max(40), > 0,75*TubeWidth
+		[TestCase(18, 18, 14, 14, 2, 10, 1, 80, nameof(WrenchParameters.HolesDiameter),
 		  TestName = "Негативный тест HolesDiameter < min (2)")]
-		[TestCase(75, 18, 80, 14, 2, 70, 41, 100, "HolesDiameter",
+		[TestCase(75, 18, 80, 14, 2, 70, 41, 100, nameof(WrenchParameters.HolesDiameter),
 		  TestName = "Негативный тест HolesDiameter > max (40)")]
-		[TestCase(18, 18, 14, 14, 2, 10, 9, 80, "HolesDiameter",
+		[TestCase(18, 18, 14, 14, 2, 10, 9, 80, nameof(WrenchParameters.HolesDiameter),
 		  TestName = "Негативный тест HolesDiameter > 0,75*TubeWidth (9)")]
 
-		//WrenchLength : 3 случая - > min(80), > max(400), 
+		// WrenchLength : 3 случая - > min(80), > max(400), 
 		// < (LeftOpeningDepth + RightOpeningDepth + HolesDiameter) * 2
-		[TestCase(18, 18, 14, 14, 2, 10, 1, 79, "WrenchLength",
+		[TestCase(18, 18, 14, 14, 2, 10, 1, 79, nameof(WrenchParameters.WrenchLength),
 		  TestName = "Негативный тест WrenchLength < min (80)")]
-		[TestCase(75, 18, 80, 14, 2, 70, 41, 401, "WrenchLength",
+		[TestCase(75, 18, 80, 14, 2, 70, 41, 401, nameof(WrenchParameters.WrenchLength),
 		  TestName = "Негативный тест WrenchLength > max (400)")]
-		[TestCase(18, 30, 14, 20, 2, 10, 4, 107, "HolesDiameter",
+		[TestCase(18, 30, 14, 20, 2, 10, 4, 107, nameof(WrenchParameters.WrenchLength),
 		  TestName = "Негативный тест WrenchLength > ((LeftOpDepth + RightOpDepth + HolesDiam) * 2) ((30+20+4)*2)")]
-        
-		//TODO: RSDN
-		public void TestWrenchParameters_ArgumentValue(double rightOpeningSize, 
+        public void TestWrenchParameters_ArgumentValue(double rightOpeningSize, 
 			double rightOpeningDepth, double leftOpeningSize, double leftOpeningDepth, 
 			double wallThickness, double tubeWidth, double holesDiameter, 
 			double wrenchLength, string attr)
@@ -186,9 +184,10 @@ namespace WrenchPlugin.UnitTests
 		  TestName = "Негативный тест максимума параметра")]
 		[TestCase("Имя параметра", 1, 5, 6, "Value",
 		  TestName = "Негативный тест максимума параметра")]
-
+		[TestCase("", 1, 10, 6, "Name",
+		  TestName = "Негативный тест имени параметра")]
 		public void TestParameter_ArgumentValue(string name, double minimum, 
-			double maximum, double value, string attr)
+			double maximum, double value, string attribute)
 		{
 			Assert.Throws<ArgumentException>(
 				() =>
@@ -196,7 +195,7 @@ namespace WrenchPlugin.UnitTests
 					var parameter = new Parameter(name, minimum, maximum, value);
 				},
 				"Должно возникнуть исключение, если значение поля "
-				+ attr + "выходит за диапазон допустимых значений");
+				+ attribute + "выходит за диапазон допустимых значений");
 		}
 	}
 }

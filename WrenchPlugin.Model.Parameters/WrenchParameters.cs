@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WrenchPlugin.Model.Parameters
 {
 	/// <summary>
-	/// Класс параметров ключа.
+	/// Класс параметров ключа
 	/// </summary>
 	public class WrenchParameters
 	{
@@ -145,9 +145,10 @@ namespace WrenchPlugin.Model.Parameters
 					+ HolesDiameter.Value) * minimalLengthCoefficient;
 				if (value.Value < minimalLength)
 				{
-					//TODO: RSDN
-					throw new ArgumentException($"- {value.Name} при данном диаметре отверстий " +
-						$"и глубине зевов должна составлять минимум {minimalLength} мм");
+					//TODO: RSDN +
+					throw new ArgumentException($"- {value.Name} при данном " +
+						$"диаметре отверстий и глубине зевов " +
+						$"должна составлять минимум {minimalLength} мм");
 				}
 				else
 				{

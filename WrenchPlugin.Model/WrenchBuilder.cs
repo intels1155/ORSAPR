@@ -5,7 +5,10 @@ using WrenchPlugin.Model.Parameters;
 
 namespace WrenchPlugin.Model.Kompas
 {
-	//TODO: RSDN
+	//TODO: RSDN +
+	/// <summary>
+	/// Класс построения модели ключа
+	/// </summary>
 	public class WrenchBuilder
 	{
 		/// <summary>
@@ -33,8 +36,7 @@ namespace WrenchPlugin.Model.Kompas
 
 			// Массив эскизов
 			ksEntity[] sketchList = new ksEntity[6];
-
-			//TODO: В именованые константы
+			
 			const double openingsPartRatio = 0.75;
 			const double middlePlaneRatio = 1.75;
 

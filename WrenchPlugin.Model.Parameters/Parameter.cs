@@ -11,7 +11,7 @@ namespace WrenchPlugin.Model.Parameters
 		/// <summary>
 		/// Имя параметра
 		/// </summary>
-		public string Name { get; set; }
+		private string _name;
 
 		/// <summary>
 		/// Минимальное значение параметра
@@ -75,6 +75,25 @@ namespace WrenchPlugin.Model.Parameters
 				}
 				ValidateDouble(value);
 				_maximum = value;
+			}
+		}
+
+		/// <summary>
+		/// Имя параметра
+		/// </summary>
+		public string Name
+		{
+			get => _name;
+			set
+			{
+				if (String.IsNullOrEmpty(value))
+				{
+					throw new ArgumentException("Имя параметра не может быть пустым");
+				}
+				else
+				{
+					_name = value;
+				}
 			}
 		}
 
