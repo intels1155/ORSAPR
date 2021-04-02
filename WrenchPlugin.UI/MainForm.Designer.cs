@@ -57,6 +57,7 @@
 			this.TubeSizeLabel = new System.Windows.Forms.Label();
 			this.defaultParamComboBox = new System.Windows.Forms.ComboBox();
 			this.DefaultParametersLabel = new System.Windows.Forms.Label();
+			this.sectionShapeCheckBox = new System.Windows.Forms.CheckBox();
 			this.ParameterBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.holesDiameterNum)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.wallThicknessNum)).BeginInit();
@@ -137,7 +138,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.BuildButton.FlatAppearance.BorderSize = 2;
 			this.BuildButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.BuildButton.Location = new System.Drawing.Point(68, 300);
+			this.BuildButton.Location = new System.Drawing.Point(68, 316);
 			this.BuildButton.Name = "BuildButton";
 			this.BuildButton.Size = new System.Drawing.Size(212, 30);
 			this.BuildButton.TabIndex = 0;
@@ -147,6 +148,7 @@
 			// 
 			// ParameterBox
 			// 
+			this.ParameterBox.Controls.Add(this.sectionShapeCheckBox);
 			this.ParameterBox.Controls.Add(this.label1);
 			this.ParameterBox.Controls.Add(this.holesDiameterNum);
 			this.ParameterBox.Controls.Add(this.wallThicknessNum);
@@ -175,7 +177,7 @@
 			this.ParameterBox.ForeColor = System.Drawing.SystemColors.WindowText;
 			this.ParameterBox.Location = new System.Drawing.Point(12, 39);
 			this.ParameterBox.Name = "ParameterBox";
-			this.ParameterBox.Size = new System.Drawing.Size(320, 250);
+			this.ParameterBox.Size = new System.Drawing.Size(320, 271);
 			this.ParameterBox.TabIndex = 18;
 			this.ParameterBox.TabStop = false;
 			this.ParameterBox.Text = "Параметры ключа";
@@ -524,11 +526,22 @@
 			this.DefaultParametersLabel.TabIndex = 22;
 			this.DefaultParametersLabel.Text = "Параметры по умолчанию:";
 			// 
+			// sectionShapeCheckBox
+			// 
+			this.sectionShapeCheckBox.AutoSize = true;
+			this.sectionShapeCheckBox.Location = new System.Drawing.Point(23, 247);
+			this.sectionShapeCheckBox.Name = "sectionShapeCheckBox";
+			this.sectionShapeCheckBox.Size = new System.Drawing.Size(182, 17);
+			this.sectionShapeCheckBox.TabIndex = 26;
+			this.sectionShapeCheckBox.Text = "Круглое сечение трубки ключа";
+			this.sectionShapeCheckBox.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.sectionShapeCheckBox.UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(344, 341);
+			this.ClientSize = new System.Drawing.Size(344, 354);
 			this.Controls.Add(this.DefaultParametersLabel);
 			this.Controls.Add(this.defaultParamComboBox);
 			this.Controls.Add(this.ParameterBox);
@@ -584,6 +597,7 @@
 		private System.Windows.Forms.ComboBox defaultParamComboBox;
 		private System.Windows.Forms.Label DefaultParametersLabel;
 		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.CheckBox sectionShapeCheckBox;
 	}
 }
 

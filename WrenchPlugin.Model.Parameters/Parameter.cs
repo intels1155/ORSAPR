@@ -67,7 +67,8 @@ namespace WrenchPlugin.Model.Parameters
 				ValidateDouble(value);
 				if (value <= Minimum)
 				{
-					throw new ArgumentException("Максимум параметра меньше или равен минимуму");
+					throw new ArgumentException("Максимум параметра " +
+						"меньше или равен минимуму");
 				}
 				else
 				{

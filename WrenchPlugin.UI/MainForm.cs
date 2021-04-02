@@ -26,6 +26,13 @@ namespace WrenchPlugin.UI
 		/// </summary>
 		private void BuildButton_Click(object sender, EventArgs e)
 		{
+			bool roundSection = false;
+
+			if (sectionShapeCheckBox.Checked)
+			{
+				roundSection = true;
+			}
+
 			try
 			{
 				WrenchParameters wrenchParameters = new WrenchParameters(

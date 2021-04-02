@@ -35,7 +35,7 @@ namespace WrenchPlugin.UnitTests
 				2, // WallThickness
 				10, // TubeWidth
 				4, // HolesDiameter
-				180 // WrenchLength 18, 18, 14, 14, 2, 10, 4, 80
+				180 // WrenchLength
 				);
 			_defaultWrenchParameters = new WrenchParameters();
 			_parameter = new Parameter("Имя параметра", 0.5, 10.5, 5);
@@ -198,7 +198,7 @@ namespace WrenchPlugin.UnitTests
         public void TestWrenchParameters_ArgumentValue(double rightOpeningSize, 
 			double rightOpeningDepth, double leftOpeningSize, double leftOpeningDepth, 
 			double wallThickness, double tubeWidth, double holesDiameter, 
-			double wrenchLength, string attr)
+			double wrenchLength, string attribute)
 		{
 			Assert.Throws<ArgumentException>(
 				() =>
@@ -214,24 +214,51 @@ namespace WrenchPlugin.UnitTests
 					wrenchLength);
 				},
 				"Должно возникнуть исключение, если значение поля "
-				+ attr + "выходит за диапазон допустимых значений");
+				+ attribute + "выходит за диапазон допустимых значений");
 		}
 
-		[TestCase("Имя параметра", 0, 10, 5, "Minimum",
-			TestName = "Негативный тест минимума параметра")]
-		[TestCase("Имя параметра", 5, 4, 5, "Maximum",
-			TestName = "Негативный тест максимума параметра")]
-		[TestCase("Имя параметра", 1, 1, 1, "Maximum",
-			TestName = "Негативный тест максимума параметра")]
-		[TestCase("Имя параметра", 1, -1, 1, "Maximum",
-			TestName = "Негативный тест максимума параметра")]
-		[TestCase("Имя параметра", 1, 1, 1, "Maximum",
-			TestName = "Негативный тест максимума параметра")]
+		[TestCase("Имя параметра", 0, 10, 5, nameof(Parameter.Minimum),
+			TestName = "Минимум параметра равен 0")]
+		[TestCase("Имя параметра", -1, 10, 5, nameof(Parameter.Minimum),
+			TestName = "Минимум параметра меньше 0")]
+		[TestCase("Имя параметра", 5, 4, 5, nameof(Parameter.Minimum),
+			TestName = "Минимум параметра больше максимума")]
+		[TestCase("Имя параметра", double.PositiveInfinity, 10, 2, nameof(Parameter.Minimum),
+			TestName = "Негативный тест минимума параметра на PositiveInfinity")]
+		[TestCase("Имя параметра", double.NegativeInfinity, 10, 2, nameof(Parameter.Minimum),
+			TestName = "Негативный тест минимума параметра на NegativeInfinity")]
+		[TestCase("Имя параметра", double.NaN, 10, 2, nameof(Parameter.Minimum),
+			TestName = "Негативный тест минимума параметра на NaN")]
 
-		[TestCase("Имя параметра", 1, 5, 6, "Value",
-			TestName = "Негативный тест максимума параметра")]
-		[TestCase("", 1, 10, 6, "Name",
+		[TestCase("Имя параметра", 1, 1, 1, nameof(Parameter.Maximum),
+			TestName = "Максимум параметра равен минимуму")]
+		[TestCase("Имя параметра", 2, 1, 3, nameof(Parameter.Maximum),
+			TestName = "Максимум параметра меньше минимума")]
+		[TestCase("Имя параметра", 2, 0, 1, nameof(Parameter.Maximum),
+			TestName = "Максимум параметра равен 0")]
+		[TestCase("Имя параметра", 1, -1, 1, nameof(Parameter.Maximum),
+			TestName = "Максимум параметра меньше 0")]
+		[TestCase("Имя параметра", 1, double.PositiveInfinity, 2, nameof(Parameter.Maximum),
+			TestName = "Негативный тест максимума параметра на PositiveInfinity")]
+		[TestCase("Имя параметра", 1, double.NegativeInfinity, 2, nameof(Parameter.Maximum),
+			TestName = "Негативный тест максимума параметра на NegativeInfinity")]
+		[TestCase("Имя параметра", 1, double.NaN, 2, nameof(Parameter.Maximum),
+			TestName = "Негативный тест максимума параметра на NaN")]
+
+		[TestCase("Имя параметра", 1, 5, 6, nameof(Parameter.Value),
+			TestName = "Значение параметра больше максимума")]
+		[TestCase("Имя параметра", 1, 5, 0.5, nameof(Parameter.Value),
+			TestName = "Значение параметра меньше минимума")]
+		[TestCase("Имя параметра", 1, 10, double.PositiveInfinity, nameof(Parameter.Value),
+			TestName = "Негативный тест значения параметра на PositiveInfinity")]
+		[TestCase("Имя параметра", 1, 10, double.NegativeInfinity, nameof(Parameter.Value),
+			TestName = "Негативный тест значения параметра на NegativeInfinity")]
+		[TestCase("Имя параметра", 1, 10, double.NaN, nameof(Parameter.Value),
+			TestName = "Негативный тест значения параметра на NaN")]
+
+		[TestCase("", 1, 10, 6, nameof(Parameter.Name),
 			TestName = "Негативный тест имени параметра")]
+
 		public void TestParameter_ArgumentValue(string name, double minimum, 
 			double maximum, double value, string attribute)
 		{
