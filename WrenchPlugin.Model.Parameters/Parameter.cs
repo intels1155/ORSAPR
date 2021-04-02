@@ -37,11 +37,6 @@ namespace WrenchPlugin.Model.Parameters
 		/// <param name="value">Значение</param>
 		public Parameter(string name, double minimum, double maximum, double value)
 		{
-			
-			if (minimum >= maximum)
-			{
-				throw new ArgumentException($"{name}: максимум параметра меньше или равен минимуму");
-			}
 			Name = name;
 			Minimum = minimum;
 			Maximum = maximum;
@@ -69,12 +64,15 @@ namespace WrenchPlugin.Model.Parameters
 			get => _maximum;
 			set 
 			{
+				ValidateDouble(value);
 				if (value <= Minimum)
 				{
 					throw new ArgumentException("Максимум параметра меньше или равен минимуму");
 				}
-				ValidateDouble(value);
-				_maximum = value;
+				else
+				{
+					_maximum = value;
+				}
 			}
 		}
 

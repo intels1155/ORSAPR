@@ -101,7 +101,8 @@ namespace WrenchPlugin.Model.Parameters
 				if (value.Value > RightOpeningSize.Value 
                     || value.Value > LeftOpeningSize.Value)
 				{
-					throw new ArgumentException($"- {value.Name} не может быть больше размера зевов");
+					throw new ArgumentException($"- {value.Name} " + 
+						$"не может быть больше размера зевов");
 				}
 				else
 				{

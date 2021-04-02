@@ -15,6 +15,11 @@ namespace WrenchPlugin.UnitTests
 		private WrenchParameters _wrenchParams;
 
 		/// <summary>
+		/// Параметры ключа по умолчанию
+		/// </summary>
+		private WrenchParameters _defaultWrenchParameters;
+
+		/// <summary>
 		/// Параметр
 		/// </summary>
 		private Parameter _parameter;
@@ -32,6 +37,7 @@ namespace WrenchPlugin.UnitTests
 				4, // HolesDiameter
 				180 // WrenchLength 18, 18, 14, 14, 2, 10, 4, 80
 				);
+			_defaultWrenchParameters = new WrenchParameters();
 			_parameter = new Parameter("Имя параметра", 0.5, 10.5, 5);
 		}
 
@@ -73,6 +79,39 @@ namespace WrenchPlugin.UnitTests
 				"Некорректное значение HolesDiameter");
 			Assert.AreEqual
 				(expectedWrenchParameters.WrenchLength.Value, actual.WrenchLength.Value,
+				"Некорректное значение WrenchLength");
+		}
+
+		[Test(Description = "Позитивный тест конструктора по умолчанию " +
+			"класса WrenchParameters")]
+		public void TestDefaultWrenchParameters_CorrectValue()
+		{
+			var expectedDefaultWrenchParameters = new WrenchParameters();
+			var actual = _defaultWrenchParameters;
+
+			Assert.AreEqual
+			(expectedDefaultWrenchParameters.LeftOpeningSize.Value, actual.LeftOpeningSize.Value,
+				"Некорректное значение LeftOpeningSize");
+			Assert.AreEqual
+			(expectedDefaultWrenchParameters.LeftOpeningDepth.Value, actual.LeftOpeningDepth.Value,
+				"Некорректное значение LeftOpeningDepth");
+			Assert.AreEqual
+			(expectedDefaultWrenchParameters.RightOpeningSize.Value, actual.RightOpeningSize.Value,
+				"Некорректное значение RightOpeningSize");
+			Assert.AreEqual
+			(expectedDefaultWrenchParameters.RightOpeningDepth.Value, actual.RightOpeningDepth.Value,
+				"Некорректное значение RightOpeningDepth");
+			Assert.AreEqual
+			(expectedDefaultWrenchParameters.WallThickness.Value, actual.WallThickness.Value,
+				"Некорректное значение WallThickness");
+			Assert.AreEqual
+			(expectedDefaultWrenchParameters.TubeWidth.Value, actual.TubeWidth.Value,
+				"Некорректное значение TubeWidth");
+			Assert.AreEqual
+			(expectedDefaultWrenchParameters.HolesDiameter.Value, actual.HolesDiameter.Value,
+				"Некорректное значение HolesDiameter");
+			Assert.AreEqual
+			(expectedDefaultWrenchParameters.WrenchLength.Value, actual.WrenchLength.Value,
 				"Некорректное значение WrenchLength");
 		}
 
@@ -179,13 +218,20 @@ namespace WrenchPlugin.UnitTests
 		}
 
 		[TestCase("Имя параметра", 0, 10, 5, "Minimum",
-		  TestName = "Негативный тест минимума параметра")]
-		[TestCase("Имя параметра", 1, 5, 0, "Maximum",
-		  TestName = "Негативный тест максимума параметра")]
+			TestName = "Негативный тест минимума параметра")]
+		[TestCase("Имя параметра", 5, 4, 5, "Maximum",
+			TestName = "Негативный тест максимума параметра")]
+		[TestCase("Имя параметра", 1, 1, 1, "Maximum",
+			TestName = "Негативный тест максимума параметра")]
+		[TestCase("Имя параметра", 1, -1, 1, "Maximum",
+			TestName = "Негативный тест максимума параметра")]
+		[TestCase("Имя параметра", 1, 1, 1, "Maximum",
+			TestName = "Негативный тест максимума параметра")]
+
 		[TestCase("Имя параметра", 1, 5, 6, "Value",
-		  TestName = "Негативный тест максимума параметра")]
+			TestName = "Негативный тест максимума параметра")]
 		[TestCase("", 1, 10, 6, "Name",
-		  TestName = "Негативный тест имени параметра")]
+			TestName = "Негативный тест имени параметра")]
 		public void TestParameter_ArgumentValue(string name, double minimum, 
 			double maximum, double value, string attribute)
 		{

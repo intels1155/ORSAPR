@@ -43,7 +43,8 @@ namespace WrenchPlugin.UI
 			}
 			catch (ArgumentException ex)
 			{
-				MessageBox.Show(ex.Message, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show(ex.Message, "Предупреждение", 
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
 
