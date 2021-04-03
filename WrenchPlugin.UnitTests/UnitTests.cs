@@ -1,8 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using WrenchPlugin.Model.Kompas;
 using WrenchPlugin.Model.Parameters;
-using WrenchPlugin.UI;
 
 namespace WrenchPlugin.UnitTests
 {
