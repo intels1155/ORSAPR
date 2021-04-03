@@ -23,9 +23,15 @@ namespace WrenchPlugin.Model.Parameters
 		private Parameter _holesDiameter;
 
 		/// <summary>
-		/// Длина ключа.
+		/// Длина ключа
 		/// </summary>
 		private Parameter _wrenchLength;
+
+		/// <summary>
+		/// Тип сечения ключа,
+		/// false - шестигранный, true - круглый
+		/// </summary>
+		private bool _roundSection;
 
 		/// <summary>
 		/// Конструктор класса WrenchParameters
@@ -38,6 +44,7 @@ namespace WrenchPlugin.Model.Parameters
 		/// <param name="tubeWidth">Ширина трубки ключа</param>
 		/// <param name="holesDiameter">Диаметр отверстий ключа</param>
 		/// <param name="wrenchLength">Длина ключа</param>
+		/// <param name="roundSection"></param>
 		public WrenchParameters(
 			double leftOpeningSize,
 			double leftOpeningDepth,
@@ -46,7 +53,8 @@ namespace WrenchPlugin.Model.Parameters
 			double wallThickness,
 			double tubeWidth,
 			double holesDiameter,
-			double wrenchLength)
+			double wrenchLength,
+			bool roundSection)
 		{
 
 			LeftOpeningSize = new Parameter("Размер зева 1", 4, 75, leftOpeningSize);
@@ -57,9 +65,10 @@ namespace WrenchPlugin.Model.Parameters
 			TubeWidth = new Parameter("Ширина трубки ключа", 4, 75, tubeWidth);
 			HolesDiameter = new Parameter("Диаметр отверстий ключа", 2, 40, holesDiameter);
 			WrenchLength = new Parameter("Длина ключа", 80, 400, wrenchLength);
+			RoundSection = roundSection;
 		}
 
-		public WrenchParameters():this(16,24,18,26,4,14,6,180)
+		public WrenchParameters():this(16,24,18,26,4,14,6,180, false)
         {}
 
 		/// <summary>
@@ -157,5 +166,10 @@ namespace WrenchPlugin.Model.Parameters
 				}
 			}
 		}
+
+		/// <summary>
+		/// Тип сечения средней части ключа
+		/// </summary>
+		public bool RoundSection { get; set; }
 	}
 }

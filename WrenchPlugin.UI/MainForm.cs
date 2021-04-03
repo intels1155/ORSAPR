@@ -26,12 +26,7 @@ namespace WrenchPlugin.UI
 		/// </summary>
 		private void BuildButton_Click(object sender, EventArgs e)
 		{
-			bool roundSection = false;
-
-			if (sectionShapeCheckBox.Checked)
-			{
-				roundSection = true;
-			}
+			bool roundSection = sectionShapeCheckBox.Checked;
 
 			try
 			{
@@ -43,7 +38,8 @@ namespace WrenchPlugin.UI
 					(double)wallThicknessNum.Value,
 					(double)tubeWidthNum.Value,
 					(double)holesDiameterNum.Value,
-					(double)wrenchLengthNum.Value);
+					(double)wrenchLengthNum.Value,
+					roundSection);
 				KompasConnector kompasConnector = new KompasConnector();
 				WrenchBuilder wrenchbuilder = new WrenchBuilder();
 				wrenchbuilder.Build(kompasConnector, wrenchParameters);
