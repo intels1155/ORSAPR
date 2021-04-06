@@ -68,34 +68,20 @@ namespace WrenchPlugin.Model.Kompas
 				wrenchParameters.RightOpeningSize.Value
 			};
 
-			// Круглое сечение
-			if (wrenchParameters.RoundSection)
+			for (int i = 0; i < sketchList.Length; i++)
 			{
-				for (int i = 0; i < sketchList.Length; i++)
+				if ((i == 2 || i == 3) && (wrenchParameters.RoundSection))
 				{
-					if (i == 2 || i == 3)
-					{
-						CreateSketch(kompasConnector, out sketchList[i],
-							ref currentPlane, planeOffsetList[i], polygonSizeList[i], true);
-					}
-					else
-					{
-						CreateSketch(kompasConnector, out sketchList[i],
-							ref currentPlane, planeOffsetList[i], polygonSizeList[i],false);
-					}
+					CreateSketch(kompasConnector, out sketchList[i], 
+						ref currentPlane, planeOffsetList[i], polygonSizeList[i], true);
 				}
-			}
-			// Шестигранное сечение
-			else
-			{
-				for (int i = 0; i < sketchList.Length; i++)
+				else
 				{
 					CreateSketch(kompasConnector, out sketchList[i],
-						ref currentPlane, planeOffsetList[i], polygonSizeList[i], false);
+						ref currentPlane, planeOffsetList[i], polygonSizeList[i],false);
 				}
 			}
 
-			// Элемент по сечениям
 			for (int i = 0; i < polygonSizeList.Length - 1; i++)
 			{
 				CreateLoftElement(kompasConnector, sketchList[i], 
