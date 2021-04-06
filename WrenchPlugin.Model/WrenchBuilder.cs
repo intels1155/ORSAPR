@@ -73,7 +73,7 @@ namespace WrenchPlugin.Model.Kompas
 			{
 				for (int i = 0; i < sketchList.Length; i++)
 				{
-					if (polygonSizeList[i] == wrenchParameters.TubeWidth.Value)
+					if (i == 2 || i == 3)
 					{
 						CreateSketch(kompasConnector, out sketchList[i],
 							ref currentPlane, planeOffsetList[i], polygonSizeList[i], true);
