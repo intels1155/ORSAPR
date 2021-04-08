@@ -47,6 +47,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StressTest.cs" />
     <Compile Include="UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +58,10 @@
     <ProjectReference Include="..\WrenchPlugin.Model.Parameters\WrenchPlugin.Model.Parameters.csproj">
       <Project>{38299af7-b9f7-4ec1-a56c-3a6aad980294}</Project>
       <Name>WrenchPlugin.Model.Parameters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WrenchPlugin.Model\WrenchPlugin.Model.Kompas.csproj">
+      <Project>{9b9f4ea5-891a-4734-9116-bdead015a5af}</Project>
+      <Name>WrenchPlugin.Model.Kompas</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

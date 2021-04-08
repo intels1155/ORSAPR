@@ -143,64 +143,65 @@ namespace WrenchPlugin.UnitTests
 
 		// LeftOpeningSize
 		[TestCase(3, 18, 14, 14, 2, 10, 4, 80, false, nameof(WrenchParameters.LeftOpeningSize),
-		  TestName = "Негативный тест LeftOpeningSize < min (4)")]
+		  TestName = "Присвоение полю LeftOpeningSize значения меньше минимума")]
 		[TestCase(76, 18, 14, 14, 2, 10, 4, 80, false, nameof(WrenchParameters.LeftOpeningSize),
-		  TestName = "Негативный тест LeftOpeningSize > max (75)")]
+		  TestName = "Присвоение полю LeftOpeningSize значения больше максимума")]
 		[TestCase(12, 12, 14, 14, 2, 14, 4, 80, false, nameof(WrenchParameters.LeftOpeningSize),
 		  TestName = "Негативный тест LeftOpeningSize (12) < TubeWidth (14)")]
 
 		// LeftOpeningDepth
 		[TestCase(18, 1, 14, 14, 2, 10, 4, 80, false, nameof(WrenchParameters.LeftOpeningDepth),
-		  TestName = "Негативный тест LeftOpeningDepth < min (2)")]
+		  TestName = "Присвоение полю LeftOpeningDepth значения меньше минимума")]
 		[TestCase(18, 51, 14, 14, 2, 10, 4, 80, false, nameof(WrenchParameters.LeftOpeningDepth),
-		  TestName = "Негативный тест LeftOpeningDepth > max (50)")]
+		  TestName = "Присвоение полю LeftOpeningDepth значения больше максимума")]
 
 		// RightOpeningSize
 		[TestCase(18, 18, 4, 14, 2, 10, 4, 80, false, nameof(WrenchParameters.RightOpeningSize),
-		  TestName = "Негативный тест RightOpeningSize < min (5)")]
+		  TestName = "Присвоение полю RightOpeningSize значения меньше минимума")]
 		[TestCase(18, 18, 81, 14, 2, 10, 4, 80, false, nameof(WrenchParameters.RightOpeningSize),
-		  TestName = "Негативный тест RightOpeningSize > max (80)")]
+		  TestName = "Присвоение полю RightOpeningSize значения больше максимума")]
 		[TestCase(18, 18, 14, 14, 2, 16, 4, 80, false, nameof(WrenchParameters.RightOpeningSize),
 		  TestName = "Негативный тест RightOpeningSize (14) < TubeWidth (16)")]
 
 		// RightOpeningDepth
 		[TestCase(18, 18, 14, 2, 2, 10, 4, 80, false, nameof(WrenchParameters.RightOpeningDepth),
-		  TestName = "Негативный тест RightOpeningDepth < min (2.5)")]
+		  TestName = "Присвоение полю RightOpeningDepth значения меньше минимума")]
 		[TestCase(18, 18, 14, 51, 2, 10, 4, 80, false, nameof(WrenchParameters.RightOpeningDepth),
-		  TestName = "Негативный тест RightOpeningDepth > max (50)")]
+		  TestName = "Присвоение полю RightOpeningDepth значения больше максимума")]
 		
 		// WallThickness
 		[TestCase(18, 18, 14, 14, 1, 10, 4, 80, false, nameof(WrenchParameters.WallThickness),
-		  TestName = "Негативный тест WallThickness < min (2)")]
+		  TestName = "Присвоение полю WallThickess значения меньше минимума")]
 		[TestCase(18, 18, 14, 14, 15, 10, 4, 80, false, nameof(WrenchParameters.WallThickness),
-		  TestName = "Негативный тест WallThickness > max (14)")]
+		  TestName = "Присвоение полю WallThickess значения больше максимума")]
 
 		// TubeWidth
 		[TestCase(18, 18, 14, 14, 2, 19, 4, 80, false, nameof(WrenchParameters.TubeWidth),
-		  TestName = "Негативный тест TubeWidth > LeftOpeningSize")]
+		  TestName = "Негативный тест при значении TubeWidth > LeftOpeningSize")]
 		[TestCase(18, 18, 14, 14, 2, 20, 4, 80, false, nameof(WrenchParameters.TubeWidth),
-		  TestName = "Негативный тест TubeWidth > RightOpeningSize")]
+		  TestName = "Негативный тест при значении TubeWidth > RightOpeningSize")]
 		[TestCase(18, 18, 14, 14, 2, 3, 4, 80, false, nameof(WrenchParameters.TubeWidth),
-		  TestName = "Негативный тест TubeWidth < min (4)")]
+		  TestName = "Присвоение полю TubeWidth значения меньше минимума")]
 		[TestCase(75, 18, 80, 14, 2, 76, 4, 80, false, nameof(WrenchParameters.TubeWidth),
-		  TestName = "Негативный тест TubeWidth > max (75)")]
+		  TestName = "Присвоение полю TubeWidth значения больше максимума")]
 
 		// HolesDiameter : 3 случая - > min(2), > max(40), > 0,75*TubeWidth
 		[TestCase(18, 18, 14, 14, 2, 10, 1, 80, false, nameof(WrenchParameters.HolesDiameter),
-		  TestName = "Негативный тест HolesDiameter < min (2)")]
+		  TestName = "Присвоение полю HolesDiameter значения меньше минимума")]
 		[TestCase(75, 18, 80, 14, 2, 70, 41, 100, false, nameof(WrenchParameters.HolesDiameter),
-		  TestName = "Негативный тест HolesDiameter > max (40)")]
+		  TestName = "Присвоение полю HolesDiameter значения больше максимума")]
 		[TestCase(18, 18, 14, 14, 2, 10, 9, 80, false, nameof(WrenchParameters.HolesDiameter),
-		  TestName = "Негативный тест HolesDiameter > 0,75*TubeWidth (9)")]
+		  TestName = "Негативный тест при значении HolesDiameter > 0,75*TubeWidth")]
 
 		// WrenchLength : 3 случая - > min(80), > max(400), 
 		// < (LeftOpeningDepth + RightOpeningDepth + HolesDiameter) * 2
 		[TestCase(18, 18, 14, 14, 2, 10, 1, 79, false, nameof(WrenchParameters.WrenchLength),
-		  TestName = "Негативный тест WrenchLength < min (80)")]
+		  TestName = "Присвоение полю WrenchLength значения меньше минимума")]
 		[TestCase(75, 18, 80, 14, 2, 70, 41, 401, false, nameof(WrenchParameters.WrenchLength),
-		  TestName = "Негативный тест WrenchLength > max (400)")]
+		  TestName = "Присвоение полю WrenchLength значения больше максимума")]
 		[TestCase(18, 30, 14, 20, 2, 10, 4, 107, false, nameof(WrenchParameters.WrenchLength),
-		  TestName = "Негативный тест WrenchLength > ((LeftOpDepth + RightOpDepth + HolesDiam) * 2) ((30+20+4)*2)")]
+		  TestName = "Негативный тест при значении поля WrenchLength > " +
+		             "((LeftOpeningDepth + RightOpeningDepth + HolesDiameter) * 2) ((30+20+4)*2)")]
         public void TestWrenchParameters_ArgumentValue(double rightOpeningSize, 
 			double rightOpeningDepth, double leftOpeningSize, double leftOpeningDepth, 
 			double wallThickness, double tubeWidth, double holesDiameter, 

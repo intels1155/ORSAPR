@@ -1,6 +1,7 @@
 ﻿using System;
 using Kompas6API5;
 using Kompas6Constants3D;
+using System.Runtime.InteropServices;
 
 namespace WrenchPlugin.Model.Kompas
 {
@@ -37,11 +38,17 @@ namespace WrenchPlugin.Model.Kompas
 		/// </summary>
 		public void TakeKompas()
 		{
-			if (Kompas == null)
+			try
+			{
+				Kompas = (KompasObject)Marshal.GetActiveObject
+					("KOMPAS.Application.5");
+			}
+			catch
 			{
 				Type t = Type.GetTypeFromProgID("KOMPAS.Application.5");
 				Kompas = (KompasObject)Activator.CreateInstance(t);
 			}
+
 			Kompas.Visible = true;
 			Kompas.ActivateControllerAPI();
 
