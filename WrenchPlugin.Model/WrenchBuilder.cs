@@ -78,7 +78,7 @@ namespace WrenchPlugin.Model.Kompas
 				else
 				{
 					CreateSketch(kompasConnector, out sketchList[i],
-						ref currentPlane, planeOffsetList[i], polygonSizeList[i],false);
+						ref currentPlane, planeOffsetList[i], polygonSizeList[i], false);
 				}
 			}
 

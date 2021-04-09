@@ -20,24 +20,27 @@ namespace WrenchPlugin.UnitTests
 		{
 			var writer = new StreamWriter($@"{AppDomain.CurrentDomain.BaseDirectory}\StressTest.txt");//заменено на относительный путь
 
-			var kompass = new KompasConnector();
-			//var parameters = new WrenchParameters();
-			//var builder = new WrenchBuilder();
-			var count = 100;
+			var kompas1 = new KompasConnector();
+			var count = 190;
 
 			var processes = Process.GetProcessesByName("kStudy");
 			var process = processes.First();
 
-			var ramCounter = new PerformanceCounter("Process", "Working Set", process.ProcessName);
+			var ramCounter = new PerformanceCounter("Process", "Working Set - Private", process.ProcessName);
 			var cpuCounter = new PerformanceCounter("Process", "% Processor Time", process.ProcessName);
+			Stopwatch stopwatch = new Stopwatch();
 
 			for (int i = 0; i < count; i++)
 			{
+				stopwatch.Start();
+
 				cpuCounter.NextValue();
 				var kompas = new KompasConnector();
 				var parameters = new WrenchParameters();
 				var builder = new WrenchBuilder();
 				builder.Build(kompas, parameters);
+
+				stopwatch.Stop();
 
 				var ram = ramCounter.NextValue();
 				var cpu = cpuCounter.NextValue();
@@ -45,8 +48,11 @@ namespace WrenchPlugin.UnitTests
 				writer.Write($"{i}. ");
 				writer.Write($"RAM: {Math.Round(ram / 1024 / 1024)} MB");
 				writer.Write($"\tCPU: {cpu} %");
+				writer.Write($"\ttime: {stopwatch.Elapsed}");
 				writer.Write(Environment.NewLine);
 				writer.Flush();
+
+				stopwatch.Reset();
 			}
 		}
 	}
