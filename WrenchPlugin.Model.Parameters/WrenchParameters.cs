@@ -155,6 +155,7 @@ namespace WrenchPlugin.Model.Parameters
 					+ HolesDiameter.Value) * minimalLengthCoefficient;
 				if (value.Value < minimalLength)
 				{
+					//TODO: RSDN +
 					throw new ArgumentException($"- {value.Name} при данном " +
 						$"диаметре отверстий и глубине зевов " +
 						$"должна составлять минимум {minimalLength} мм");
