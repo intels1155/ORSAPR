@@ -5,7 +5,6 @@ using WrenchPlugin.Model.Parameters;
 
 namespace WrenchPlugin.Model.Kompas
 {
-	//TODO: RSDN +
 	/// <summary>
 	/// Класс построения модели ключа
 	/// </summary>
